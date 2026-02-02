@@ -146,8 +146,9 @@ footer {
 /* ================= SHOW DATES ================= */
 .show-dates {
     padding: 50px 20px;
-    text-align: left;
+    text-align: center;   /* restore */
 }
+
 
 .events-container {
     max-width: 760px;
@@ -200,7 +201,7 @@ footer {
     line-height: 1.4;
 }
 
-/* ===== DESKTOP ===== */
+/* ===== DESKTOP (TRUE 3 COLUMNS) ===== */
 @media (min-width: 768px) {
 
     .events-container {
@@ -211,14 +212,29 @@ footer {
     .event-item {
         grid-template-columns: 110px auto max-content;
         column-gap: 12px;
-        align-items: baseline;
+        align-items: start;   /* ← THIS fixes row splitting */
+    }
+
+    .event-date {
+        grid-column: 1;
+        grid-row: 1;
+        font-size: 1.15em;
+    }
+
+    .event-venue {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 1.15em;
     }
 
     .event-address {
+        grid-column: 3;
+        grid-row: 1;          /* FORCE same row */
         text-align: right;
         justify-self: end;
     }
 }
+
 
 
 /* ================= GALLERY ================= */
