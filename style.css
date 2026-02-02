@@ -151,9 +151,9 @@ footer {
 .instagram-wrapper {
     position: relative;
     width: 100%;
-    max-width: 500px;  /* limits desktop width */
-    margin: 0 auto;    /* center on page */
-    height: 600px;     /* adjust as needed */
+    max-width: 500px;   /* adjust for desktop */
+    margin: 0 auto;     /* centers the iframe */
+    height: 500px;      /* default height (mobile first) */
 }
 
 .instagram-wrapper iframe {
@@ -164,6 +164,20 @@ footer {
     height: 100%;
     border: none;
     overflow: hidden;
+}
+
+/* Desktop larger height */
+@media (min-width: 768px) {
+    .instagram-wrapper {
+        height: 800px;   /* show more posts on desktop */
+    }
+}
+
+/* Optional: very small mobile screens */
+@media (max-width: 400px) {
+    .instagram-wrapper {
+        height: 400px;   /* shrink on tiny phones */
+    }
 }
 
 
