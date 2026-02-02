@@ -162,7 +162,7 @@ footer {
 }
 
 .events-container {
-    max-width: 600px;
+    max-width: 300px;
     margin: 0 auto;
 }
 
@@ -181,7 +181,7 @@ footer {
 }
 
 /* Desktop: single row, address pushed right */
-@media (min-width: 768px) {
+@media (min-width: 300px) {
     .event-item {
         flex-wrap: nowrap;
         justify-content: flex-start;
