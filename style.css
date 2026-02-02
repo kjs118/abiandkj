@@ -146,7 +146,7 @@ footer {
 /* ================= SHOW DATES ================= */
 .show-dates {
     padding: 50px 20px;
-    text-align: center;
+    text-align: left;
 }
 
 .events-container {
@@ -163,7 +163,7 @@ footer {
 
 .event-item {
     display: grid;
-    grid-template-columns: auto 1fr;   /* Date | Info */
+    grid-template-columns: auto 1fr;
     column-gap: 14px;
     row-gap: 4px;
     align-items: start;
@@ -179,16 +179,15 @@ footer {
     grid-column: 1;
     grid-row: 1 / span 2;
     font-weight: 700;
-    font-size: 1.1em;
+    font-size: 1.05em;
     text-align: left;
-    white-space: nowrap;
 }
 
 .event-venue {
     grid-column: 2;
     grid-row: 1;
     font-weight: 700;
-    font-size: 1.1em;
+    font-size: 1.05em;
     text-align: left;
 }
 
@@ -201,18 +200,18 @@ footer {
     line-height: 1.4;
 }
 
-/* ===== DESKTOP EVENTS LAYOUT ===== */
+/* ===== DESKTOP ===== */
 @media (min-width: 768px) {
 
     .events-container {
-        max-width: 620px;   /* ⬅️ THIS is the key */
+        max-width: 620px;
+        margin: 0 auto;
     }
 
     .event-item {
         grid-template-columns: 110px auto max-content;
         column-gap: 12px;
         align-items: baseline;
-        justify-content: start; /* prevents stretching */
     }
 
     .event-address {
