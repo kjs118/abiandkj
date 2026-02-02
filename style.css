@@ -156,6 +156,7 @@ footer {
     height: auto;
 }
 
+/* Show Dates – Tightened desktop layout */
 .show-dates {
     padding: 50px 20px;
     text-align: center;
@@ -169,14 +170,14 @@ footer {
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .event-item {
     display: flex;
     align-items: baseline;
-    flex-wrap: nowrap;           /* desktop: force single row */
-    gap: 12px;                   /* date → venue gap – adjust this number */
+    flex-wrap: nowrap;
+    gap: 16px;                   /* date → venue gap – small */
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
@@ -189,16 +190,10 @@ footer {
     text-align: left;
 }
 
-.event-right {
-    flex: 1;
-    display: flex;
-    align-items: baseline;
-    gap: 32px;                   /* venue → address gap on desktop – adjust this */
-}
-
 .event-venue {
     font-weight: 700;
     font-size: 1.25em;
+    flex: 0 0 auto;
     text-align: left;
     white-space: nowrap;
 }
@@ -208,12 +203,18 @@ footer {
     font-size: 1em;
     color: #555;
     text-align: right;
-    margin-left: auto;           /* pushes address to far right */
+    margin-left: auto;           /* pushes to right on same row */
     white-space: pre-line;
+    flex: 1 1 auto;
 }
 
 /* Mobile */
 @media (max-width: 767px) {
+    .logo {
+        height: 12.5vh;
+        width: auto;
+    }
+
     .event-item {
         flex-wrap: wrap;
         gap: 20px;
@@ -221,28 +222,25 @@ footer {
     }
 
     .event-date {
-        padding-left: 32px;      /* ← more left padding from screen edge – adjust 32px to taste */
-        min-width: 110px;
-        font-size: 1.12em;
-    }
-
-    .event-right {
-        flex-direction: column;
-        gap: 8px;                /* vertical gap venue → address – adjust 8px */
-        width: 100%;
-        padding-right: 20px;
+        padding-left: 32px;      /* more padding from left edge */
+        min-width: auto;
+        font-size: 1.15em;
     }
 
     .event-venue {
-        font-size: 1.12em;
+        font-size: 1.15em;
         text-align: left;
+        margin-bottom: 6px;
+        width: 100%;
     }
 
     .event-address {
         font-size: 0.98em;
         text-align: left;
+        width: 100%;
     }
 }
+
 /* Gallery */
 .gallery {
     display: grid;
@@ -270,7 +268,7 @@ footer {
     text-align: center;
 }
 
-/* Desktop nav & header */
+/* Desktop header */
 @media (min-width: 768px) {
     .desktop-nav {
         display: block;
