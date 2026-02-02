@@ -1,0 +1,59 @@
+<!-- gallery.html (Gallery page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abi & KJ - Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-content">
+            <img src="assets/logo.jpg" alt="Abi & KJ Logo" class="logo">
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shows.html">Show Dates</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-nav">
+                <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+                <nav id="mobile-menu" class="mobile-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shows.html">Show Dates</a></li>
+                        <li><a href="gallery.html" class="active">Gallery</a></li>
+                        <li><a href="booking.html">Booking</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="separator"></div>
+    </header>
+
+    <main>
+        <section class="gallery">
+            <!-- Add your photo imgs here with classes for varying sizes -->
+            <img src="assets/photo1.jpg" class="photo large" alt="Photo 1">
+            <img src="assets/photo2.jpg" class="photo small" alt="Photo 2">
+            <img src="assets/photo3.jpg" class="photo medium" alt="Photo 3">
+            <img src="assets/photo4.jpg" class="photo tall" alt="Photo 4">
+            <img src="assets/photo5.jpg" class="photo wide" alt="Photo 5">
+            <!-- Add more photos as needed; CSS will handle masonry-like layout -->
+        </section>
+    </main>
+
+    <footer>
+        <!-- Same footer as above -->
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
