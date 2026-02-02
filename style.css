@@ -156,13 +156,14 @@ footer {
     height: auto;
 }
 
+/* Show Dates */
 .show-dates {
     padding: 50px 20px;
     text-align: center;
 }
 
 .events-container {
-    max-width: 300px;
+    max-width: 720px;           /* tightened from 900px – adjust if needed */
     margin: 0 auto;
 }
 
@@ -175,71 +176,67 @@ footer {
 .event-item {
     display: flex;
     align-items: baseline;
-    gap: 12px 16px; /* vertical | horizontal: small date-venue, reasonable venue-address */
+    gap: 12px 16px;             /* date-venue = 12px vertical gap if wrapped, 16px horizontal */
     padding: 10px 0;
     border-bottom: 1px solid #eee;
+    flex-wrap: nowrap;
 }
 
-/* Desktop: single row, address pushed right */
-@media (min-width: 300px) {
-    .event-item {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-    }
-
-    .event-date {
-        font-weight: 700;
-        font-size: 1.25em;
-        min-width: 120px;
-        flex: 0 0 auto;
-        text-align: left;
-    }
-
-    .event-venue {
-        font-weight: 700;
-        font-size: 1.25em;
-        flex: 0 0 auto;
-        text-align: left;
-        white-space: nowrap;
-    }
-
-    .event-address {
-        font-weight: 400;
-        font-size: 1em;
-        color: #555;
-        text-align: right;
-        margin-left: auto;
-        white-space: pre-line;
-        flex: 1 1 auto;
-        padding-left: 8px; /* tiny buffer to avoid butting */
-    }
+.event-date {
+    font-weight: 700;
+    font-size: 1.25em;
+    min-width: 110px;
+    flex: 0 0 auto;
+    text-align: left;
 }
 
-/* Mobile: two columns – date left (padded), venue/address stacked left-aligned right */
+.event-venue {
+    font-weight: 700;
+    font-size: 1.25em;
+    flex: 0 0 auto;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.event-address {
+    font-weight: 400;
+    font-size: 1em;
+    color: #555;
+    text-align: right;
+    margin-left: auto;
+    white-space: pre-line;
+    flex: 1 1 auto;
+}
+
+/* Mobile: two-column layout */
 @media (max-width: 767px) {
+    .logo {
+        height: 12.5vh;
+        width: auto;
+    }
+
     .event-item {
         flex-wrap: wrap;
-        justify-content: space-between;
         gap: 20px;
         align-items: flex-start;
     }
 
     .event-date {
-        flex: 0 0 35%; /* left column width – adjust % if needed */
-        padding-left: 32px; /* increased left padding from screen edge */
+        padding-left: 32px;     /* padding from left screen edge */
+        min-width: 110px;
         font-size: 1.15em;
         text-align: left;
     }
 
     .event-venue {
-        flex: 0 0 100%;
+        flex: 1 1 100%;
         font-size: 1.15em;
         text-align: left;
-        margin-bottom: 8px; /* vertical gap to address – adjust 8px */
+        margin-bottom: 8px;
     }
 
     .event-address {
-        flex: 0 0 100%;
+        flex: 1 1 100%;
         font-size: 0.98em;
         text-align: left;
     }
@@ -272,7 +269,7 @@ footer {
     text-align: center;
 }
 
-/* Desktop header */
+/* Desktop header adjustments */
 @media (min-width: 768px) {
     .desktop-nav {
         display: block;
