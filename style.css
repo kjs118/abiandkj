@@ -195,7 +195,7 @@ footer {
 .event-venue {
     font-weight: 700;
     font-size: 1.2em;
-    min-width: 160px;            /* Tight middle */
+    min-width: 100px;            /* Tight middle */
     text-align: left;
     flex-shrink: 0;
 }
