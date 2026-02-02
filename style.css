@@ -156,28 +156,28 @@ footer {
     height: auto;
 }
 
-/* Show Dates – Tight desktop row, fixed mobile */
+/* Show Dates */
 .show-dates {
     padding: 50px 20px;
     text-align: center;
 }
 
 .events-container {
-    max-width: 720px;           /* tighter overall width – feels more like nav spacing */
+    max-width: 720px;           /* narrower to reduce overall spread */
     margin: 0 auto;
 }
 
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
 }
 
 .event-item {
     display: flex;
     align-items: baseline;
     flex-wrap: nowrap;
-    gap: 12px 10px;             /* date-venue = 12px vertical if wrapped, venue-address = 10px horizontal – very tight */
+    gap: 12px 8px;              /* date-venue = 12px vertical if wrapped, venue-address = 8px horizontal – very tight */
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
@@ -185,7 +185,7 @@ footer {
 .event-date {
     font-weight: 700;
     font-size: 1.25em;
-    min-width: 100px;           /* reduced so less forced space */
+    min-width: 100px;
     flex: 0 0 auto;
     text-align: left;
 }
@@ -204,9 +204,9 @@ footer {
     color: #555;
     text-align: right;
     white-space: pre-line;
-    flex: 1 1 auto;
-    max-width: 400px;           /* caps address width – prevents huge void */
-    margin-left: 20px;          /* controlled space after venue – adjust 20px */
+    margin-left: 24px;          /* controlled fixed space after venue – adjust 24px down to 16px or 12px if still too big */
+    flex: 0 1 auto;
+    max-width: 380px;           /* caps address to prevent void */
 }
 
 /* Mobile */
@@ -223,7 +223,7 @@ footer {
     }
 
     .event-date {
-        padding-left: 32px;     /* left padding from edge */
+        padding-left: 32px;     /* left padding from screen edge */
         min-width: 100px;
         font-size: 1.15em;
     }
