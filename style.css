@@ -175,9 +175,10 @@ footer {
 
 .event-item {
     display: flex;
+    flex-wrap: nowrap;           /* ← This is the most important line – prevents wrapping */
     align-items: baseline;
     justify-content: center;
-    gap: 8px 10px; /* first number = vertical (if wrapped), second = horizontal between columns */
+    gap: 8px 14px;               /* ← play with the second number */
     padding: 8px 0;
     border-bottom: 1px solid #eee;
 }
@@ -213,38 +214,35 @@ footer {
 
 /* Mobile adjustments */
 @media (max-width: 767px) {
-    .logo {
-        height: 12.5vh;
-        width: auto;
-    }
-
     .event-item {
-        gap: 16px;
         justify-content: space-between;
+        gap: 24px;                   /* ← bigger gap between date and venue */
         align-items: flex-start;
-        padding: 12px 0;
+        padding: 16px 0;
     }
 
     .event-date {
-        width: 38%;
+        width: 32%;                  /* ← made date a bit narrower */
         font-size: 1.1em;
         text-align: left;
     }
 
     .event-right {
-        width: 62%;
-        max-width: none;
+        width: 68%;                  /* ← takes more space → starts earlier */
+        display: flex;
+        flex-direction: column;
+        text-align: left;
     }
 
     .event-venue {
         font-size: 1.1em;
+        margin-bottom: 6px;          /* ← increased vertical breathing room */
         text-align: left;
-        margin-bottom: 4px; /* adjust this for vertical spacing on mobile */
     }
 
     .event-address {
         font-size: 0.95em;
-        text-align: left; /* mobile: left aligned under venue */
+        text-align: left;
     }
 }
 
