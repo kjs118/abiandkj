@@ -4,7 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abi & KJ - Show Dates</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            position: relative;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .separator {
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Desktop Nav */
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .desktop-nav li {
+            margin: 0 15px;
+        }
+
+        .desktop-nav a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .desktop-nav a.active {
+            text-decoration: underline;
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: block;
+        }
+
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .mobile-menu li {
+            margin: 20px 0;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .mobile-menu a.active {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f8f8;
+            margin-top: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .social-links a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Show Dates */
+        .show-dates {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .events-container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px 16px; /* date-venue horizontal gap = 16px, small and tight */
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .event-date {
+            font-weight: 700;
+            font-size: 1.25em;
+            min-width: 110px;
+            flex: 0 0 auto;
+            text-align: left;
+        }
+
+        .event-venue {
+            font-weight: 700;
+            font-size: 1.25em;
+            flex: 0 0 auto;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .event-address {
+            font-weight: 400;
+            font-size: 1em;
+            color: #555;
+            text-align: right;
+            margin-left: auto;
+            white-space: pre-line;
+            flex: 1 1 auto;
+            padding-left: 8px;
+        }
+
+        /* Mobile: two columns – date left (padded), venue/address stacked right */
+        @media (max-width: 767px) {
+            .logo {
+                height: 12.5vh;
+                width: auto;
+            }
+
+            .event-item {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .event-date {
+                padding-left: 32px; /* left padding from screen edge */
+                min-width: 100px;
+                flex: 0 0 auto;
+                font-size: 1.15em;
+            }
+
+            .event-venue {
+                flex: 1 1 100%;
+                font-size: 1.15em;
+                text-align: left;
+                margin-bottom: 8px;
+            }
+
+            .event-address {
+                flex: 1 1 100%;
+                font-size: 0.98em;
+                text-align: left;
+            }
+        }
+
+        /* Desktop nav */
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="sticky-header">
@@ -19,7 +255,7 @@
                 </ul>
             </nav>
             <div class="mobile-nav">
-                <div class="hamburger" onclick="toggleMenu()">☰</div>
+                <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
                 <nav id="mobile-menu" class="mobile-menu">
                     <ul>
                         <li><a href="index.html">Home</a></li>
@@ -130,13 +366,11 @@
 
     <footer>
         <div class="social-links">
-            <!-- Facebook SVG -->
             <a href="https://facebook.com/yourprofile" target="_blank">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22.675 0H1.325C0.593 0 0 0.593 0 1.325V22.676C0 23.407 0.593 24 1.325 24H12.82V14.706H9.692V11.084H12.82V8.413C12.82 5.313 14.713 3.625 17.479 3.625C18.804 3.625 19.942 3.724 20.274 3.768V7.008L18.356 7.009C16.852 7.009 16.561 7.724 16.561 8.772V11.085H20.148L19.681 14.707H16.561V24H22.677C23.407 24 24 23.407 24 22.675V1.325C24 0.593 23.407 0 22.675 0Z" fill="currentColor"/>
                 </svg>
             </a>
-            <!-- Instagram SVG -->
             <a href="https://instagram.com/yourprofile" target="_blank">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2.163C15.204 2.163 15.585 2.175 16.85 2.233C20.102 2.368 21.621 3.924 21.756 7.176C21.814 8.441 21.826 8.822 21.826 12.026C21.826 15.23 21.814 15.611 21.756 16.876C21.621 20.128 20.102 21.684 16.85 21.819C15.585 21.877 15.204 21.889 12 21.889C8.796 21.889 8.415 21.877 7.15 21.819C3.898 21.684 2.379 20.128 2.244 16.876C2.186 15.611 2.174 15.23 2.174 12.026C2.174 8.822 2.186 8.441 2.244 7.176C2.379 3.924 3.898 2.368 7.15 2.233C8.415 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.244 0.244 2.695 0.072 7.053C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.667 0.072 16.947C0.244 21.305 2.695 23.756 7.053 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.667 23.986 16.947 23.928C21.305 23.756 23.756 21.305 23.928 16.947C23.986 15.667 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.756 2.695 21.305 0.244 16.947 0.072C15.667 0.014 15.259 0 12 0ZM12 5.838C8.597 5.838 5.838 8.597 5.838 12C5.838 15.403 8.597 18.162 12 18.162C15.403 18.162 18.162 15.403 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16.5C9.514 16.5 7.5 14.486 7.5 12C7.5 9.514 9.514 7.5 12 7.5C14.486 7.5 16.5 9.514 16.5 12C16.5 14.486 14.486 16.5 12 16.5ZM18.406 3.969C18.406 4.676 17.83 5.252 17.123 5.252C16.416 5.252 15.84 4.676 15.84 3.969C15.84 3.262 16.416 2.686 17.123 2.686C17.83 2.686 18.406 3.262 18.406 3.969Z" fill="currentColor"/>
