@@ -232,14 +232,14 @@ footer {
     }
 
     .event-venue {
-        flex: 0 0 65%;
+        flex: 0 0 100%;
         font-size: 1.15em;
         text-align: left;
         margin-bottom: 8px; /* vertical gap to address – adjust 8px */
     }
 
     .event-address {
-        flex: 0 0 65%;
+        flex: 0 0 100%;
         font-size: 0.98em;
         text-align: left;
     }
