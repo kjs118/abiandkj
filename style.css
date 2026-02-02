@@ -6,6 +6,7 @@ body {
     color: #333;
 }
 
+/* ================= HEADER ================= */
 .sticky-header {
     position: sticky;
     top: 0;
@@ -32,9 +33,7 @@ body {
 }
 
 /* Desktop Nav */
-.desktop-nav {
-    display: none;
-}
+.desktop-nav { display: none; }
 
 .desktop-nav ul {
     list-style: none;
@@ -44,23 +43,17 @@ body {
     justify-content: center;
 }
 
-.desktop-nav li {
-    margin: 0 15px;
-}
+.desktop-nav li { margin: 0 15px; }
 
 .desktop-nav a {
     text-decoration: none;
     color: #333;
 }
 
-.desktop-nav a.active {
-    text-decoration: underline;
-}
+.desktop-nav a.active { text-decoration: underline; }
 
 /* Mobile Nav */
-.mobile-nav {
-    display: block;
-}
+.mobile-nav { display: block; }
 
 .hamburger {
     font-size: 30px;
@@ -84,9 +77,7 @@ body {
     align-items: center;
 }
 
-.mobile-menu.open {
-    display: flex;
-}
+.mobile-menu.open { display: flex; }
 
 .mobile-menu ul {
     list-style: none;
@@ -94,9 +85,7 @@ body {
     text-align: center;
 }
 
-.mobile-menu li {
-    margin: 20px 0;
-}
+.mobile-menu li { margin: 20px 0; }
 
 .mobile-menu a {
     text-decoration: none;
@@ -104,11 +93,9 @@ body {
     font-size: 24px;
 }
 
-.mobile-menu a.active {
-    text-decoration: underline;
-}
+.mobile-menu a.active { text-decoration: underline; }
 
-/* Footer */
+/* ================= FOOTER ================= */
 footer {
     text-align: center;
     padding: 20px;
@@ -128,7 +115,7 @@ footer {
     text-decoration: none;
 }
 
-/* Home Page */
+/* ================= HOME ================= */
 .hero {
     padding: 20px;
     text-align: center;
@@ -156,94 +143,95 @@ footer {
     height: auto;
 }
 
-/* Show Dates */
+/* ================= SHOW DATES ================= */
 .show-dates {
     padding: 50px 20px;
     text-align: center;
 }
 
 .events-container {
-    max-width: 720px;           /* narrower – adjust to 680px or 640px if still too wide */
+    max-width: 760px;
     margin: 0 auto;
 }
 
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
+
+/* ===== EVENT GRID LAYOUT (MOBILE FIRST) ===== */
 
 .event-item {
-    display: flex;
-    align-items: baseline;
+    display: grid;
+    grid-template-columns: auto 1fr;   /* Date | Info */
+    column-gap: 14px;
+    row-gap: 4px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
 }
 
-/* Desktop: one row, tight gaps, address right but close */
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-date {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.event-venue {
+    grid-column: 2;
+    grid-row: 1;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+.event-address {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.95em;
+    color: #555;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* ===== DESKTOP EVENTS LAYOUT ===== */
 @media (min-width: 768px) {
+
     .event-item {
-        flex-wrap: nowrap;
-        gap: 12px 12px;         /* date-venue = 12px, venue-address = 12px – very tight */
-        justify-content: flex-start;
+        grid-template-columns: 120px auto 1fr; /* Date | Venue | Address */
+        column-gap: 18px;
+        align-items: baseline;
     }
 
     .event-date {
-        font-weight: 700;
-        font-size: 1.25em;
-        min-width: 100px;
-        flex: 0 0 auto;
-        text-align: left;
+        grid-column: 1;
+        grid-row: 1;
+        font-size: 1.2em;
     }
 
     .event-venue {
-        font-weight: 700;
-        font-size: 1.25em;
-        flex: 0 0 auto;
-        text-align: left;
-        white-space: nowrap;
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 1.2em;
     }
 
     .event-address {
-        font-weight: 400;
-        font-size: 1em;
-        color: #555;
+        grid-column: 3;
+        grid-row: 1;
         text-align: right;
-        white-space: pre-line;
-        flex: 0 1 auto;         /* don't grow – stay content-sized */
-        margin-left: 24px;      /* fixed small space after venue – adjust 24px down to 12px or 16px */
-        max-width: 380px;       /* prevent it from expanding too far right */
+        justify-self: end;
+        max-width: 340px;
     }
 }
 
-/* Mobile: two columns – date left, venue+address stacked right */
-@media (max-width: 767px) {
-    .event-item {
-        flex-wrap: wrap;
-        gap: 24px;
-        align-items: flex-start;
-        justify-content: space-between;
-    }
-
-    .event-date {
-        width: 35%;             /* left column */
-        padding-left: 32px;     /* indent from left edge – increase to 40px if needed */
-        font-size: 1.15em;
-        text-align: left;
-    }
-
-    .event-venue {
-        width: 65%;             /* right column */
-        font-size: 1.15em;
-        text-align: left;
-        margin-bottom: 8px;     /* vertical space to address */
-    }
-
-    .event-address {
-        width: 65%;
-        font-size: 0.98em;
-        text-align: left;
-    }
-}
-/* Gallery */
+/* ================= GALLERY ================= */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -264,21 +252,16 @@ footer {
 .tall { grid-row-end: span 35; }
 .wide { grid-column-end: span 2; grid-row-end: span 20; }
 
-/* Booking */
+/* ================= BOOKING ================= */
 .booking {
     padding: 20px;
     text-align: center;
 }
 
-/* Desktop header adjustments */
+/* ===== Desktop Header Adjustments ===== */
 @media (min-width: 768px) {
-    .desktop-nav {
-        display: block;
-    }
-
-    .mobile-nav {
-        display: none;
-    }
+    .desktop-nav { display: block; }
+    .mobile-nav { display: none; }
 
     .header-content {
         flex-direction: column;
