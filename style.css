@@ -165,7 +165,7 @@ footer {
 }
 
 .events-container {
-    max-width: 800px;    /* Narrower → less spread, still centered */
+    max-width: 640px;    /* Narrower → less spread, still centered */
     margin: 0 auto;
 }
 
