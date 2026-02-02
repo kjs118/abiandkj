@@ -163,42 +163,50 @@ footer {
 }
 
 .events-container {
-    max-width: 800px;  /* ← increased a bit so row has more room to breathe */
+    max-width: 900px;           /* wider to give room for one-row layout */
     margin: 0 auto;
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .event-item {
     display: flex;
-    flex-wrap: nowrap;          /* ← CRITICAL: prevents address from wrapping to new line */
+    flex-wrap: nowrap;          /* forces everything on one line on desktop */
     align-items: baseline;
-    justify-content: center;
-    gap: 8px 12px;              /* vertical | horizontal – adjust horizontal (2nd number) to taste */
+    justify-content: space-between; /* spreads content, but centered container keeps overall block centered */
+    gap: 12px;                  /* uniform gap; adjust if you want date-venue tighter than venue-address */
     padding: 8px 0;
     border-bottom: 1px solid #eee;
-    overflow: hidden;           /* prevents overflow if very long content */
 }
 
 .event-date {
     font-weight: 700;
-    font-size: 1.18em;
-    min-width: 100px;           /* ← reduced so less chance of forcing wrap */
+    font-size: 1.2em;
+    min-width: 110px;
+    flex: 0 0 auto;             /* won't grow or shrink much */
     text-align: left;
-    flex-shrink: 0;
+}
+
+.event-right {
+    flex: 1 1 auto;             /* takes remaining space */
+    display: flex;
+    flex-direction: row;        /* ← key change: venue and address side-by-side on desktop */
+    justify-content: flex-end;  /* pushes them right */
+    align-items: baseline;
+    gap: 20px;                  /* space between venue and address on same row */
+    min-width: 0;               /* allows shrinking if needed */
 }
 
 .event-venue {
     font-weight: 700;
-    font-size: 1.18em;
-    min-width: 140px;           /* ← adjusted for typical venue length */
+    font-size: 1.2em;
     text-align: left;
-    flex-shrink: 1;             /* ← allow slight shrink if needed */
-}
-
-.event-right {
-    flex: 1;                    /* ← let it take remaining space */
-    max-width: 380px;
-    display: flex;
-    flex-direction: column;
+    flex-shrink: 1;
+    white-space: nowrap;        /* prevents venue from wrapping */
 }
 
 .event-address {
@@ -206,33 +214,36 @@ footer {
     font-size: 1em;
     color: #555;
     text-align: right;
+    white-space: pre-line;      /* preserves <br> line breaks */
+    flex-shrink: 1;
 }
 
 /* Mobile adjustments */
 @media (max-width: 767px) {
     .event-item {
-        justify-content: space-between;
-        gap: 24px;                   /* ← bigger gap between date and venue */
-        align-items: flex-start;
+        flex-wrap: wrap;           /* allow stacking */
+        justify-content: flex-start;
+        gap: 20px 16px;            /* horizontal gap larger for breathing room */
         padding: 16px 0;
     }
 
     .event-date {
-        width: 32%;                  /* ← made date a bit narrower */
+        width: auto;
+        min-width: 100px;
+        padding-left: 16px;        /* ← more left padding from screen edge */
         font-size: 1.1em;
-        text-align: left;
     }
 
     .event-right {
-        width: 68%;                  /* ← takes more space → starts earlier */
-        display: flex;
-        flex-direction: column;
-        text-align: left;
+        width: 100%;
+        flex-direction: column;    /* stack venue over address */
+        justify-content: flex-start;
+        gap: 6px;                  /* vertical gap between venue and address */
+        padding-right: 16px;       /* symmetric right padding */
     }
 
     .event-venue {
         font-size: 1.1em;
-        margin-bottom: 6px;          /* ← increased vertical breathing room */
         text-align: left;
     }
 
