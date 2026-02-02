@@ -158,82 +158,79 @@ footer {
     height: auto;
 }
 
-/* Show Dates - Flexbox Layout */
+/* Show Dates - Centered & Aligned Layout */
 .show-dates {
-    padding: 40px 20px; /* More padding top/bottom and sides for centering feel */
-    max-width: 1000px;  /* Optional: cap width for large screens */
-    margin: 0 auto;     /* Center the section */
+    padding: 60px 20px;          /* More vertical breathing room, side padding for mobile */
+    text-align: center;          /* Centers h2 and container */
+}
+
+.events-container {
+    max-width: 800px;            /* Narrower for better centering on wide screens */
+    margin: 0 auto;              /* True center */
 }
 
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between events */
+    gap: 24px;                   /* Nice space between events */
+    text-align: left;            /* Content left-aligned inside centered container */
 }
 
 .event-item {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 20px; /* Space between date, venue, address */
-    padding: 15px 0;
-    border-bottom: 1px solid #eee; /* Subtle separator between events */
+    align-items: baseline;
+    gap: 16px 32px;              /* Horizontal gap between columns, vertical if wrapped */
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .event-date,
 .event-venue {
-    font-weight: bold;
-    font-size: 1.2em; /* Larger/heavier for date & venue */
+    font-weight: 700;            /* Bolder */
+    font-size: 1.25em;           /* Larger for prominence */
 }
 
 .event-date {
-    min-width: 160px; /* Fixed-ish width, narrow column */
+    min-width: 180px;            /* Consistent narrow column for dates */
     flex-shrink: 0;
 }
 
 .event-venue {
-    min-width: 180px;
+    min-width: 200px;
     flex-shrink: 0;
 }
 
 .event-address {
-    font-size: 1em; /* Smaller/lighter than date/venue */
-    color: #555;
-    flex: 1; /* Takes remaining space */
-    padding-left: 10px; /* Slight indent under venue on desktop */
+    font-weight: 400;            /* Lighter/normal */
+    font-size: 1em;
+    color: #444;
+    flex: 1;                     /* Takes remaining space */
+    min-width: 220px;            /* Prevents squish */
 }
-/* Mobile adjustments */
+
+/* Mobile: Stack cleanly, address directly under venue */
 @media (max-width: 767px) {
     .event-item {
         flex-direction: column;
+        align-items: flex-start;
         gap: 8px;
-        padding: 20px 0;
     }
 
     .event-date,
     .event-venue {
-        font-size: 1.1em;
+        font-size: 1.15em;
     }
 
     .event-address {
-        padding-left: 0; /* No indent needed, full width below */
-        font-size: 0.95em;
-    }
-
-    /* Date and venue stay on "same level" but stacked if needed */
-    .event-date + .event-venue {
-        margin-top: -8px; /* Tighten if you prefer them closer */
+        padding-left: 0;         /* No indent needed on mobile */
     }
 }
 
-/* Desktop fine-tuning */
+/* Desktop: More pronounced columns with alignment */
 @media (min-width: 768px) {
-    .event-item {
-        align-items: baseline; /* Align baselines for nicer look */
-    }
-
     .event-address {
-        padding-left: 40px; /* More space before address column */
+        padding-left: 60px;      /* Indent so addresses start aligned vertically */
     }
 }
 /* Gallery - Masonry-like with CSS Grid */
