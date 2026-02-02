@@ -158,36 +158,36 @@ footer {
     height: auto;
 }
 
-/* Show Dates - Final tweaks for alignment & spacing */
+/* Show Dates – Tight desktop spread, correct mobile 2-column */
 .show-dates {
     padding: 60px 20px;
     text-align: center;
 }
 
 .events-container {
-    max-width: 1000px;  /* Balanced width for centering the row span */
+    max-width: 920px;  /* Adjusted for tighter feel while centering */
     margin: 0 auto;
 }
 
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
 .event-item {
     display: flex;
     align-items: baseline;
-    justify-content: center;  /* Centers the entire date-venue-address row */
-    gap: 10px 24px;           /* Tiny gap date→venue (tab-like), more venue→address */
-    padding: 12px 0;
+    justify-content: center;     /* Centers the full row on page */
+    gap: 8px 16px;               /* Very small date→venue gap, medium venue→address */
+    padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
 
 .event-date {
     font-weight: 700;
     font-size: 1.25em;
-    min-width: 130px;         /* Narrow left column */
+    min-width: 120px;            /* Narrow left column */
     text-align: left;
     flex-shrink: 0;
 }
@@ -195,7 +195,7 @@ footer {
 .event-venue {
     font-weight: 700;
     font-size: 1.25em;
-    min-width: 200px;         /* Middle column, close to date */
+    min-width: 180px;            /* Middle – close to date */
     text-align: left;
     flex-shrink: 0;
 }
@@ -204,12 +204,12 @@ footer {
     font-weight: 400;
     font-size: 1em;
     color: #444;
-    text-align: right;        /* Right-aligned on desktop */
-    flex: 1;                  /* Expands to fill right space */
-    max-width: 400px;         /* Caps right column for balance */
+    text-align: right;           /* Right-aligned text in right column */
+    flex: 1;
+    max-width: 380px;            /* Caps spread on wide screens */
 }
 
-/* Mobile: Left date, right stacked venue + address (left-aligned) */
+/* Mobile: Strict 2-column – date left, venue+address stacked right (left-aligned) */
 @media (max-width: 767px) {
     .event-item {
         justify-content: space-between;
@@ -218,23 +218,22 @@ footer {
     }
 
     .event-date {
-        min-width: 40%;
-        font-size: 1.15em;
+        width: 38%;              /* Left column */
+        font-size: 1.12em;
         text-align: left;
     }
 
     .event-venue {
-        min-width: 0;
-        width: 60%;
-        font-size: 1.15em;
+        width: 62%;
+        font-size: 1.12em;
         text-align: left;
-        margin-bottom: 6px;   /* Tight space between venue and address */
+        margin-bottom: 4px;      /* Tight vertical space to address */
     }
 
     .event-address {
-        width: 60%;
-        text-align: left;     /* Left-aligned in right column */
-        font-size: 0.98em;
+        width: 62%;
+        text-align: left;        /* Left-aligned in right column */
+        font-size: 0.96em;
     }
 }
 /* Gallery - Masonry-like with CSS Grid */
