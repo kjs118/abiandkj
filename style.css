@@ -163,53 +163,49 @@ footer {
 }
 
 .events-container {
-    max-width: 720px; /* adjust this if you want narrower/wider overall block */
+    max-width: 800px;  /* ← increased a bit so row has more room to breathe */
     margin: 0 auto;
-}
-
-.events-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
 }
 
 .event-item {
     display: flex;
-    flex-wrap: nowrap;           /* ← This is the most important line – prevents wrapping */
+    flex-wrap: nowrap;          /* ← CRITICAL: prevents address from wrapping to new line */
     align-items: baseline;
     justify-content: center;
-    gap: 8px 14px;               /* ← play with the second number */
+    gap: 8px 12px;              /* vertical | horizontal – adjust horizontal (2nd number) to taste */
     padding: 8px 0;
     border-bottom: 1px solid #eee;
+    overflow: hidden;           /* prevents overflow if very long content */
 }
 
 .event-date {
     font-weight: 700;
-    font-size: 1.2em;
-    min-width: 110px;
+    font-size: 1.18em;
+    min-width: 100px;           /* ← reduced so less chance of forcing wrap */
     text-align: left;
     flex-shrink: 0;
 }
 
-.event-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 400px; /* controls how far right the venue+address can stretch */
-}
-
 .event-venue {
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1.18em;
+    min-width: 140px;           /* ← adjusted for typical venue length */
     text-align: left;
-    margin-bottom: 2px; /* this controls vertical gap between venue and address on desktop & mobile */
+    flex-shrink: 1;             /* ← allow slight shrink if needed */
+}
+
+.event-right {
+    flex: 1;                    /* ← let it take remaining space */
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
 }
 
 .event-address {
     font-weight: 400;
     font-size: 1em;
     color: #555;
-    text-align: right; /* desktop: right aligned */
+    text-align: right;
 }
 
 /* Mobile adjustments */
