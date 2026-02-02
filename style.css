@@ -156,7 +156,6 @@ footer {
     height: auto;
 }
 
-/* Show Dates */
 .show-dates {
     padding: 50px 20px;
     text-align: center;
@@ -170,15 +169,14 @@ footer {
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
 }
 
 .event-item {
     display: flex;
-    flex-wrap: nowrap;           /* Force single row on desktop */
     align-items: baseline;
-    justify-content: flex-start; /* Start from left, but container centers overall */
-    gap: 16px;                   /* Date to venue gap – adjust this number for closeness */
+    flex-wrap: nowrap;           /* desktop: force single row */
+    gap: 12px;                   /* date → venue gap – adjust this number */
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
@@ -187,16 +185,22 @@ footer {
     font-weight: 700;
     font-size: 1.25em;
     min-width: 120px;
-    text-align: left;
     flex: 0 0 auto;
+    text-align: left;
+}
+
+.event-right {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 32px;                   /* venue → address gap on desktop – adjust this */
 }
 
 .event-venue {
     font-weight: 700;
     font-size: 1.25em;
     text-align: left;
-    flex: 0 0 auto;
-    white-space: nowrap;         /* Prevent venue wrap */
+    white-space: nowrap;
 }
 
 .event-address {
@@ -204,41 +208,39 @@ footer {
     font-size: 1em;
     color: #555;
     text-align: right;
-    margin-left: auto;           /* Pushes address to right side of row */
-    white-space: pre-line;       /* Keeps <br> as line break */
-    flex: 1 1 auto;              /* Allows it to take space but not force wrap */
-    min-width: 200px;            /* Prevents collapse on long dates/venues */
+    margin-left: auto;           /* pushes address to far right */
+    white-space: pre-line;
 }
 
-/* Mobile: Date left, venue+address stacked right, left-aligned */
+/* Mobile */
 @media (max-width: 767px) {
     .event-item {
         flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 24px;               /* More horizontal breathing room between date and right block */
-        padding: 16px 0;
+        gap: 20px;
+        align-items: flex-start;
     }
 
     .event-date {
-        padding-left: 24px;      /* ← Increased left padding from screen edge – adjust 24px to 32px/40px if needed */
-        min-width: auto;
-        width: auto;
-        font-size: 1.15em;
+        padding-left: 32px;      /* ← more left padding from screen edge – adjust 32px to taste */
+        min-width: 110px;
+        font-size: 1.12em;
     }
 
-    .event-venue,
-    .event-address {
+    .event-right {
+        flex-direction: column;
+        gap: 8px;                /* vertical gap venue → address – adjust 8px */
         width: 100%;
-        text-align: left;        /* Left-aligned under each other */
+        padding-right: 20px;
     }
 
     .event-venue {
-        font-size: 1.15em;
-        margin-bottom: 8px;      /* More vertical space between venue and address – was too tight */
+        font-size: 1.12em;
+        text-align: left;
     }
 
     .event-address {
-        font-size: 1em;
+        font-size: 0.98em;
+        text-align: left;
     }
 }
 /* Gallery */
