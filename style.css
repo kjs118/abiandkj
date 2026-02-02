@@ -232,7 +232,7 @@ footer {
     .event-venue { grid-column: 2; }
     .event-address { grid-column: 3; }
 }
-}
+
 /* ================= GALLERY ================= */
 .gallery {
     display: grid;
