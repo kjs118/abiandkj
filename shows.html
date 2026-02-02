@@ -1,0 +1,89 @@
+<!-- shows.html (Show Dates page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abi & KJ - Show Dates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-content">
+            <img src="assets/logo.jpg" alt="Abi & KJ Logo" class="logo">
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shows.html" class="active">Show Dates</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-nav">
+                <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+                <nav id="mobile-menu" class="mobile-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shows.html" class="active">Show Dates</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="booking.html">Booking</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="separator"></div>
+    </header>
+
+    <main>
+        <section class="show-dates">
+            <h2>Upcoming Shows</h2>
+            <table class="shows-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example rows; add your real dates -->
+                    <tr>
+                        <td>Feb 10, 2026</td>
+                        <td>Local Bar</td>
+                        <td>123 Main St<br>Baton Rouge, LA</td>
+                    </tr>
+                    <tr>
+                        <td>Mar 5, 2026</td>
+                        <td>Coffee House</td>
+                        <td>456 Elm Ave<br>New Orleans, LA</td>
+                    </tr>
+                    <!-- Add more as needed -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <!-- Same SVGs as above -->
+            <a href="https://facebook.com/yourprofile" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Facebook path here, same as index.html -->
+                </svg>
+            </a>
+            <a href="https://instagram.com/yourprofile" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Instagram path here, same as index.html -->
+                </svg>
+            </a>
+        </div>
+        <p>&copy; 2026 Abi & KJ. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
