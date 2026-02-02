@@ -213,31 +213,46 @@ footer {
 }
 
 
-/* ===== DESKTOP — CENTERED 3 COLUMNS ===== */
-
+/* ===== DESKTOP — CENTERED 3 COLUMNS (FIXED) ===== */
 @media (min-width: 768px) {
 
     .events-container {
-        max-width: 100%;
         display: flex;
-        justify-content: center; /* centers the grid block */
+        justify-content: center; /* center block on page */
     }
 
     .events-list {
-        width: fit-content;      /* grid becomes only as wide as its columns */
+        width: fit-content; /* grid width = content width */
     }
 
     .event-item {
         display: grid;
-        grid-template-columns: 110px 200px auto; /* Date | Venue | Address */
-        column-gap: 10px;        /* minimal spacing */
-        align-items: start;
+        grid-template-columns: 110px 220px auto; /* Date | Venue | Address */
+        column-gap: 12px;
+        align-items: baseline; /* keeps text aligned nicely */
     }
 
-    .event-date  { grid-column: 1; }
-    .event-venue { grid-column: 2; }
-    .event-address { grid-column: 3; }
+    .event-date {
+        grid-column: 1;
+        grid-row: 1;
+        white-space: nowrap;
+    }
+
+    .event-venue {
+        grid-column: 2;
+        grid-row: 1;
+        white-space: nowrap;
+    }
+
+    .event-address,
+    .event-location {
+        grid-column: 3;
+        grid-row: 1;      /* FORCE same row */
+        text-align: left; /* you wanted left aligned */
+        white-space: nowrap; /* PREVENT wrapping to new row */
+    }
 }
+
 
 /* ================= ART GALLERY GRID ================= */
 
