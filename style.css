@@ -204,33 +204,23 @@ footer {
 /* ===== DESKTOP EVENTS LAYOUT ===== */
 @media (min-width: 768px) {
 
-  .event-item {
-    grid-template-columns: 120px auto max-content; /* key fix */
-    column-gap: 14px; /* tighten spacing */
-    align-items: baseline;
-}
-
-
-    .event-date {
-        grid-column: 1;
-        grid-row: 1;
-        font-size: 1.2em;
+    .events-container {
+        max-width: 620px;   /* ⬅️ THIS is the key */
     }
 
-    .event-venue {
-        grid-column: 2;
-        grid-row: 1;
-        font-size: 1.2em;
+    .event-item {
+        grid-template-columns: 110px auto max-content;
+        column-gap: 12px;
+        align-items: baseline;
+        justify-content: start; /* prevents stretching */
     }
 
     .event-address {
-        grid-column: 3;
-        grid-row: 1;
         text-align: right;
         justify-self: end;
-        max-width: 340px;
     }
 }
+
 
 /* ================= GALLERY ================= */
 .gallery {
