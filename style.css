@@ -204,11 +204,12 @@ footer {
 /* ===== DESKTOP EVENTS LAYOUT ===== */
 @media (min-width: 768px) {
 
-    .event-item {
-        grid-template-columns: 120px auto 1fr; /* Date | Venue | Address */
-        column-gap: 18px;
-        align-items: baseline;
-    }
+  .event-item {
+    grid-template-columns: 120px auto max-content; /* key fix */
+    column-gap: 14px; /* tighten spacing */
+    align-items: baseline;
+}
+
 
     .event-date {
         grid-column: 1;
