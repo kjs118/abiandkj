@@ -1,0 +1,56 @@
+<!-- booking.html (Booking page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abi & KJ - Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-content">
+            <img src="assets/logo.jpg" alt="Abi & KJ Logo" class="logo">
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shows.html">Show Dates</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="booking.html" class="active">Booking</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-nav">
+                <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+                <nav id="mobile-menu" class="mobile-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shows.html">Show Dates</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="booking.html" class="active">Booking</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="separator"></div>
+    </header>
+
+    <main>
+        <section class="booking">
+            <h2>Book Us</h2>
+            <p>Get in touch to book Abi & KJ for your event!</p>
+            <p>Email: <a href="mailto:booking@abiandkj.com">booking@abiandkj.com</a></p>
+            <p>Phone: (123) 456-7890</p>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Same footer as above -->
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
