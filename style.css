@@ -187,34 +187,32 @@ footer {
 }
 
 
-/* ===== DESKTOP — TRUE 3 COLUMNS ===== */
+/* ===== DESKTOP — CENTERED 3 COLUMNS ===== */
 
 @media (min-width: 768px) {
 
     .events-container {
-        max-width: 820px;
+        max-width: 100%;
+        display: flex;
+        justify-content: center; /* centers the grid block */
+    }
+
+    .events-list {
+        width: fit-content;      /* grid becomes only as wide as its columns */
     }
 
     .event-item {
         display: grid;
         grid-template-columns: 110px 200px auto; /* Date | Venue | Address */
-        column-gap: 10px; /* MINIMAL spacing */
+        column-gap: 10px;        /* minimal spacing */
         align-items: start;
     }
 
-    .event-date {
-        grid-column: 1;
-    }
-
-    .event-venue {
-        grid-column: 2;
-    }
-
-    .event-address {
-        grid-column: 3;
-    }
+    .event-date  { grid-column: 1; }
+    .event-venue { grid-column: 2; }
+    .event-address { grid-column: 3; }
 }
-
+}
 /* ================= GALLERY ================= */
 .gallery {
     display: grid;
