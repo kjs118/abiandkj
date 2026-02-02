@@ -160,30 +160,50 @@ footer {
     flex-direction: column;
 }
 
-/* ===== MOBILE (STACKED) ===== */
+/* ===== MOBILE — 2 COLUMN SHOW LAYOUT ===== */
 
 .event-item {
+    display: grid;
+    grid-template-columns: 90px 1fr; /* Date | Info */
+    column-gap: 12px;
+    row-gap: 2px;
+    align-items: start;
     padding: 14px 0;
     border-bottom: 1px solid #eee;
 }
 
 .event-date {
+    grid-column: 1;
+    grid-row: 1 / span 3; /* stays aligned with all info rows */
     font-weight: 700;
     font-size: 1.05em;
+    text-align: left;
 }
 
 .event-venue {
+    grid-column: 2;
+    grid-row: 1;
     font-weight: 700;
+    text-align: left;
 }
 
 .event-address {
+    grid-column: 2;
+    grid-row: 2;
     font-size: 0.95em;
     color: #555;
+    text-align: left;
+    line-height: 1.35;
 }
 
-.event-item > div {
+/* if city/state/zip is separate element */
+.event-location {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: 0.95em;
+    color: #555;
     text-align: left;
-    line-height: 1.4;
+    line-height: 1.35;
 }
 
 
