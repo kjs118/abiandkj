@@ -156,36 +156,36 @@ footer {
     height: auto;
 }
 
-/* Show Dates */
+/* Show Dates – Tight desktop row, fixed mobile */
 .show-dates {
     padding: 50px 20px;
     text-align: center;
 }
 
 .events-container {
-    max-width: 720px;           /* tightened from 900px – adjust if needed */
+    max-width: 720px;           /* tighter overall width – feels more like nav spacing */
     margin: 0 auto;
 }
 
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .event-item {
     display: flex;
     align-items: baseline;
-    gap: 12px 16px;             /* date-venue = 12px vertical gap if wrapped, 16px horizontal */
+    flex-wrap: nowrap;
+    gap: 12px 10px;             /* date-venue = 12px vertical if wrapped, venue-address = 10px horizontal – very tight */
     padding: 10px 0;
     border-bottom: 1px solid #eee;
-    flex-wrap: nowrap;
 }
 
 .event-date {
     font-weight: 700;
     font-size: 1.25em;
-    min-width: 110px;
+    min-width: 100px;           /* reduced so less forced space */
     flex: 0 0 auto;
     text-align: left;
 }
@@ -203,12 +203,13 @@ footer {
     font-size: 1em;
     color: #555;
     text-align: right;
-    margin-left: auto;
     white-space: pre-line;
     flex: 1 1 auto;
+    max-width: 400px;           /* caps address width – prevents huge void */
+    margin-left: 20px;          /* controlled space after venue – adjust 20px */
 }
 
-/* Mobile: two-column layout */
+/* Mobile */
 @media (max-width: 767px) {
     .logo {
         height: 12.5vh;
@@ -222,10 +223,9 @@ footer {
     }
 
     .event-date {
-        padding-left: 32px;     /* padding from left screen edge */
-        min-width: 110px;
+        padding-left: 32px;     /* left padding from edge */
+        min-width: 100px;
         font-size: 1.15em;
-        text-align: left;
     }
 
     .event-venue {
@@ -241,7 +241,6 @@ footer {
         text-align: left;
     }
 }
-
 /* Gallery */
 .gallery {
     display: grid;
