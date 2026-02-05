@@ -120,14 +120,13 @@ footer {
 /* ================= HOME ================= */
 .hero {
     text-align: center;
-    padding: 20px 0;   /* vertical spacing only */
+    padding: 20px 0;
 }
 
-
 .hero-image {
-    display: inline-block;   /* ⭐ makes width match the image */
-    max-width: 850px;
-    width: auto;             /* prevents forced stretching */
+    display: inline-block;   /* shrink-wrap */
+    width: 90%;              /* scales down on small screens */
+    max-width: 700px;        /* ⭐ HARD LIMIT on desktop */
     height: auto;
     border: 8px solid #C78BD8;
 }
