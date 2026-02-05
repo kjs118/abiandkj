@@ -164,9 +164,6 @@ footer {
     flex-wrap: wrap;
     padding: 20px;
     gap: 20px;
-    border: 8px solid #C78BD8; /* Purple border */
-  padding: 20px;              /* Space inside the border */
-  border-radius: 8px;
 }
 
 .about-image, .about-text {
@@ -181,9 +178,6 @@ footer {
 .about-image img {
     width: 100%;
     height: auto;
- border: 8px solid #C78BD8; /* Purple border */
-  padding: 20px;              /* Space inside the border */
-  border-radius: 8px;
 }
 
 .instagram-wrapper {
@@ -191,7 +185,7 @@ footer {
     width: 100%;
     max-width: 500px;   /* adjust for desktop */
     margin: 0 auto;     /* centers the iframe */
-    height: 500px;      /* default height (mobile first) */
+   /* height: 500px;      /* default height (mobile first) */
 }
 
 .instagram-wrapper iframe {
@@ -214,7 +208,7 @@ footer {
 /* Optional: very small mobile screens */
 @media (max-width: 400px) {
     .instagram-wrapper {
-        height: 400px;   /* shrink on tiny phones */
+   /*     height: 400px;   /* shrink on tiny phones */
     }
 }
 
