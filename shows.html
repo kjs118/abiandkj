@@ -178,45 +178,73 @@
         <p>&copy; 2026 Abi & KJ. All rights reserved.</p>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('mobile-menu').classList.toggle('open');
-        }
+ <script>
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const upcomingList = document.querySelector('.events-list');
+    const archiveList = document.getElementById('archive-list');
+    const archiveSection = document.getElementById('archive');
+    const events = Array.from(upcomingList.querySelectorAll('.event-item'));
 
-            <!-- js to automatically remove past dates -->
-    document.addEventListener('DOMContentLoaded', function() {
-  const today = new Date();
-  const upcomingList = document.querySelector('.events-list');
-  const archiveList = document.querySelector('#archive .events-list');
-  const events = Array.from(upcomingList.querySelectorAll('.event-item'));
+    // Move past events to archive
+    events.forEach(event => {
+      const dateStr = event.querySelector('.event-date').textContent.trim();
+      const parts = dateStr.split('/');
+      if (parts.length !== 3) return;
+      const month = parseInt(parts[0], 10) - 1;
+      const day = parseInt(parts[1], 10);
+      const year = parseInt(parts[2], 10);
+      const eventDate = new Date(year, month, day);
 
-  // Parse dates (assumes MM/DD/YYYY format)
-  events.forEach(event => {
-    const dateStr = event.querySelector('.event-date').textContent;
-    const [month, day, year] = dateStr.split('/');
-    const eventDate = new Date(year, month - 1, day);
+      if (isNaN(eventDate.getTime())) return;
 
-    if (eventDate < today) {
-      archiveList.appendChild(event);
-    }
-  });
-// Sort remaining upcoming events by date (earliest first)
+      if (eventDate < today) {
+        archiveList.appendChild(event);
+      }
+    });
+
+    // Sort upcoming: earliest first
     const remainingEvents = Array.from(upcomingList.querySelectorAll('.event-item'));
     remainingEvents.sort((a, b) => {
-      const dateA = new Date(a.querySelector('.event-date').textContent.trim().split('/').reverse().join('-'));
-      const dateB = new Date(b.querySelector('.event-date').textContent.trim().split('/').reverse().join('-'));
+      const dateA = parseDate(a.querySelector('.event-date').textContent.trim());
+      const dateB = parseDate(b.querySelector('.event-date').textContent.trim());
       return dateA - dateB;
     });
 
-    upcomingList.innerHTML = ''; // clear
+    upcomingList.innerHTML = '';
     remainingEvents.forEach(event => upcomingList.appendChild(event));
 
-    // Show archive section only if it has events
+    // Sort archive: most recent first (newest past show at top)
+    // Change to dateA - dateB if you want oldest first instead
+    const archivedEvents = Array.from(archiveList.querySelectorAll('.event-item'));
+    archivedEvents.sort((a, b) => {
+      const dateA = parseDate(a.querySelector('.event-date').textContent.trim());
+      const dateB = parseDate(b.querySelector('.event-date').textContent.trim());
+      return dateB - dateA;  // <-- most recent first
+    });
+
+    archiveList.innerHTML = '';
+    archivedEvents.forEach(event => archiveList.appendChild(event));
+
+    // Show archive only if it has events
     if (archiveList.children.length > 0) {
       archiveSection.style.display = 'block';
     }
   });
-    </script>
+
+  // Helper function for cleaner date parsing
+  function parseDate(dateStr) {
+    const parts = dateStr.split('/');
+    if (parts.length !== 3) return new Date(0); // fallback invalid
+    const month = parseInt(parts[0], 10) - 1;
+    const day = parseInt(parts[1], 10);
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+  }
+</script>
 </body>
 </html>
