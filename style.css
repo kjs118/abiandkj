@@ -119,7 +119,7 @@ footer {
 
 /* ================= HOME ================= */
 .hero {
-    padding: 20px;
+  /*  padding: 20px; */
     text-align: center;
     position: relative;   /* ADD */
     overflow: hidden;     /* ADD */
