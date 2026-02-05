@@ -369,86 +369,103 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Use start of today to avoid time-of-day issues
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    console.log('Today (midnight):', today.toLocaleDateString());
+    today.setHours(0, 0, 0, 0); // midnight local time
+    console.log('Today (midnight):', today.toLocaleDateString('en-US'));
 
     const upcomingList = document.querySelector('.events-list');
     const archiveList = document.getElementById('archive-list');
     const archiveSection = document.getElementById('archive');
 
-    const events = Array.from(upcomingList.querySelectorAll('.event-item'));
+    // Get all event items once
+    const allEvents = Array.from(upcomingList.querySelectorAll('.event-item'));
 
-    events.forEach(event => {
+    const pastEvents = [];
+    const upcomingEvents = [];
+
+    allEvents.forEach(event => {
       const dateElem = event.querySelector('.event-date');
       if (!dateElem) return;
-      const dateStr = dateElem.textContent.trim();
+
+      let dateStr = dateElem.textContent.trim();
       console.log('Processing:', dateStr);
 
       const parts = dateStr.split('/');
       if (parts.length !== 3) {
         console.log('Invalid format:', dateStr);
+        upcomingEvents.push(event); // keep as upcoming if bad
         return;
       }
 
-      const month = parseInt(parts[0], 10);
-      const day   = parseInt(parts[1], 10);
-      const year  = parseInt(parts[2], 10);
+      let month = parseInt(parts[0], 10);
+      let day   = parseInt(parts[1], 10);
+      let year  = parseInt(parts[2], 10);
 
       if (isNaN(month) || isNaN(day) || isNaN(year)) {
         console.log('NaN in parts:', dateStr);
+        upcomingEvents.push(event);
         return;
       }
 
-      // month -1 for JS Date (0=Jan)
+      // Auto-fix 2-digit years (e.g. 25 → 2025)
+      if (year < 100) year += 2000;
+
       const eventDate = new Date(year, month - 1, day, 0, 0, 0);
-      console.log('Parsed:', eventDate.toLocaleDateString(), '— past?', eventDate < today);
+      console.log('Parsed:', eventDate.toLocaleDateString('en-US'), '— past?', eventDate < today);
 
       if (isNaN(eventDate.getTime())) {
-        console.log('Invalid date:', dateStr);
-        return;
-      }
-
-      if (eventDate < today) {
-        archiveList.appendChild(event);
-        console.log('→ Moved to archive');
+        console.log('Invalid date after parse:', dateStr);
+        upcomingEvents.push(event);
+      } else if (eventDate < today) {
+        pastEvents.push(event);
+        console.log('→ Classified as PAST');
+      } else {
+        upcomingEvents.push(event);
+        console.log('→ Classified as UPCOMING');
       }
     });
 
-    // Sort upcoming (earliest first)
-    const remaining = Array.from(upcomingList.querySelectorAll('.event-item'));
-    remaining.sort((a, b) => {
-      const da = parseDate(a.querySelector('.event-date')?.textContent.trim() || '');
-      const db = parseDate(b.querySelector('.event-date')?.textContent.trim() || '');
+    // Sort upcoming: earliest first
+    upcomingEvents.sort((a, b) => {
+      const da = getDateObj(a);
+      const db = getDateObj(b);
       return da - db;
     });
+
+    // Clear and repopulate upcoming
     upcomingList.innerHTML = '';
-    remaining.forEach(el => upcomingList.appendChild(el));
+    upcomingEvents.forEach(el => upcomingList.appendChild(el));
 
-    // Sort archive (most recent past first)
-    const archived = Array.from(archiveList.querySelectorAll('.event-item'));
-    archived.sort((a, b) => {
-      const da = parseDate(a.querySelector('.event-date')?.textContent.trim() || '');
-      const db = parseDate(b.querySelector('.event-date')?.textContent.trim() || '');
-      return db - da;
+    // Sort past: most recent first (newest past at top)
+    pastEvents.sort((a, b) => {
+      const da = getDateObj(a);
+      const db = getDateObj(b);
+      return db - da; // reverse for newest first
     });
-    archiveList.innerHTML = '';
-    archived.forEach(el => archiveList.appendChild(el));
 
-    if (archiveList.children.length > 0) {
+    // Clear and repopulate archive
+    archiveList.innerHTML = '';
+    pastEvents.forEach(el => archiveList.appendChild(el));
+
+    // Show/hide archive section
+    if (pastEvents.length > 0) {
       archiveSection.style.display = 'block';
+      console.log(`Moved ${pastEvents.length} past events to archive`);
+    } else {
+      console.log('No past events detected');
     }
   });
 
-  function parseDate(str) {
-    if (!str) return new Date(0);
+  // Helper to get Date object from event element
+  function getDateObj(eventEl) {
+    const str = eventEl.querySelector('.event-date')?.textContent.trim() || '';
     const p = str.split('/');
     if (p.length !== 3) return new Date(0);
-    const m = parseInt(p[0], 10) - 1;
-    const d = parseInt(p[1], 10);
-    const y = parseInt(p[2], 10);
-    return new Date(y, m, d, 0, 0, 0);
+    let m = parseInt(p[0], 10);
+    let d = parseInt(p[1], 10);
+    let y = parseInt(p[2], 10);
+    if (y < 100) y += 2000;
+    return new Date(y, m - 1, d, 0, 0, 0);
   }
 </script>
 </body>
