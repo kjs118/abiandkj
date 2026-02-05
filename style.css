@@ -162,12 +162,14 @@ footer {
 
 
 .divider {
-  border: none;             /* Remove default styling */
-  height: 3px;              /* Thickness of the line */
-  background-color: #C78BD8; /* Instagram purple */
-  margin: 20px 10;           /* Vertical spacing */
+  border: none;
+  height: 3px;
+  background-color: #C78BD8;
+  width: 60%;          /* controls line length */
+  max-width: 500px;    /* prevents it getting huge on big screens */
+  margin: 40px auto;   /* centers it horizontally */
+  border-radius: 2px;  /* optional soft edges */
 }
-
 
 .about {
     display: flex;
