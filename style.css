@@ -137,7 +137,7 @@ footer {
 /* 🎵 Decorative Music Notes */
 .notes {
     position: absolute;
-    width: clamp(70px, 14vw, 140px);
+    width: clamp(35px, 14vw, 140px);
     pointer-events: none;
     transition: all 0.4s ease-out;
     z-index: 2;
