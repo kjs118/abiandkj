@@ -52,7 +52,7 @@ body {
     color: #333;
 }
 
-.desktop-nav a.active { text-decoration: underline; }
+.desktop-nav a.active { text-decoration: bold; }
 
 /* Mobile Nav */
 .mobile-nav { display: block; }
@@ -95,7 +95,7 @@ body {
     font-size: 24px;
 }
 
-.mobile-menu a.active { text-decoration: underline; }
+.mobile-menu a.active { text-decoration: bold; }
 
 /* ================= FOOTER ================= */
 footer {
