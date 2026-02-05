@@ -170,6 +170,8 @@ footer {
     flex: 1;
     min-width: 300px;
     text-align: center;
+    background-color: #C78BD8; /* The Instagram purple */
+    padding: 20px;             /* Space around the inner content */
 }
 
 .about-image img {
