@@ -182,7 +182,7 @@
         function toggleMenu() {
             document.getElementById('mobile-menu').classList.toggle('open');
         }
-    </script>
+
 
             <!-- js to automatically remove past dates -->
     document.addEventListener('DOMContentLoaded', function() {
@@ -201,25 +201,22 @@
       archiveList.appendChild(event);
     }
   });
-
-  // Sort remaining upcoming by date
-  const sortedUpcoming = events
-    .filter(event => !archiveList.contains(event)) // Only upcoming
-    .sort((a, b) => {
-      const dateA = new Date(a.querySelector('.event-date').textContent.split('/').reverse().join('-'));
-      const dateB = new Date(b.querySelector('.event-date').textContent.split('/').reverse().join('-'));
+// Sort remaining upcoming events by date (earliest first)
+    const remainingEvents = Array.from(upcomingList.querySelectorAll('.event-item'));
+    remainingEvents.sort((a, b) => {
+      const dateA = new Date(a.querySelector('.event-date').textContent.trim().split('/').reverse().join('-'));
+      const dateB = new Date(b.querySelector('.event-date').textContent.trim().split('/').reverse().join('-'));
       return dateA - dateB;
     });
 
-  upcomingList.innerHTML = ''; // Clear and re-add sorted
-  sortedUpcoming.forEach(event => upcomingList.appendChild(event));
+    upcomingList.innerHTML = ''; // clear
+    remainingEvents.forEach(event => upcomingList.appendChild(event));
 
-  // Hide archive if empty
-  if (archiveList.children.length === 0) {
-    document.querySelector('#archive').style.display = 'none';
-  }
-});
-
-    
+    // Show archive section only if it has events
+    if (archiveList.children.length > 0) {
+      archiveSection.style.display = 'block';
+    }
+  });
+    </script>
 </body>
 </html>
