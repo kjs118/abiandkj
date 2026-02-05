@@ -165,7 +165,7 @@ footer {
   border: none;             /* Remove default styling */
   height: 3px;              /* Thickness of the line */
   background-color: #C78BD8; /* Instagram purple */
-  margin: 30px 0;           /* Vertical spacing */
+  margin: 0px 0;           /* Vertical spacing */
 }
 
 
