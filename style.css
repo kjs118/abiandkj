@@ -198,7 +198,7 @@ footer {
 /* Desktop larger height */
 @media (min-width: 768px) {
     .instagram-wrapper {
-        height: 800px;   /* show more posts on desktop */
+        height: 500px;   /* show more posts on desktop */
     }
 }
 
