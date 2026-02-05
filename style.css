@@ -24,7 +24,7 @@ body {
     #D8B8F5 80%, 
     #C78BD8 100%
   );
-    background-size: 200% 100%;
+    background-size: 800% 800%;
     background-repeat: repeat-x;
 
     animation: waveShift 10s linear infinite;
@@ -35,8 +35,9 @@ body {
 
 /* Animation waves */
 @keyframes waveShift {
-  0% { background-position: 0% 0%; }
-  100% { background-position: -100% 0%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 
