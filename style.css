@@ -127,15 +127,15 @@ footer {
 
 
 .hero-image {
-    width: 80%;
+    width: 100%;
     max-width: 850px;     /* controls desktop size */
     max-height: 65vh;     /* prevents skyscraper effect */
     object-fit: contain;  /* SHOW FULL IMAGE */
     display: block;
     margin: 0 auto;
-  border: 8px solid #C78BD8; /* Purple border */
-  padding: 20px;              /* Space inside the border */
-  border-radius: 8px; 
+ /* border: 8px solid #C78BD8; /* Purple border */
+ /*  padding: 20px;              /* Space inside the border */
+ /*  border-radius: 8px;  
 }
 /* 🎵 Decorative Music Notes */
 .notes {
@@ -213,6 +213,13 @@ footer {
     .instagram-wrapper {
        height: 400px;   /* shrink on tiny phones */
     }
+}
+
+.divider {
+  border: none;             /* Remove default styling */
+  height: 3px;              /* Thickness of the line */
+  background-color: #C78BD8; /* Instagram purple */
+  margin: 30px 0;           /* Vertical spacing */
 }
 
 
