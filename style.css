@@ -137,41 +137,26 @@ footer {
 /* 🎵 Decorative Music Notes */
 .notes {
     position: absolute;
-    width: 140px;                 /* BIG version */
+    width: clamp(70px, 14vw, 140px);
     pointer-events: none;
-   transition: all 0.6s cubic-bezier(.22,1,.36,1);
+    transition: all 0.4s ease-out;
     z-index: 2;
 }
 
+
 .notes-left {
-    left: 8%;
-    top: 30px;
-        transform: rotate(-8deg);
+    left: clamp(8px, 3vw, 60px);
+    top: clamp(8px, 3vw, 40px);  
+    transform: rotate(-8deg);
 }
 
 .notes-right {
-    right: 8%;
-    top: 30px;
-        transform: rotate(8deg);
+    right: clamp(8px, 3vw, 60px);
+    top: clamp(8px, 3vw, 40px);
+    transform: rotate(8deg);
 }
-/* 📱 Smaller screens = corner mode */
-@media (max-width: 768px) {
 
-    .notes {
-        width: 45px;
-        top: 8px;
-    }
 
-    .notes-left {
-        left: 10px;
-        transform: rotate(-12deg);
-    }
-
-    .notes-right {
-        right: 10px;
-        transform: rotate(12deg);
-    }
-}
 
 
 .about {
