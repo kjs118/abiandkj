@@ -52,7 +52,7 @@ body {
     color: #333;
 }
 
-.desktop-nav a.active { text-decoration: bold; }
+.desktop-nav a.active { font-weight: bold; }
 
 /* Mobile Nav */
 .mobile-nav { display: block; }
@@ -95,7 +95,7 @@ body {
     font-size: 24px;
 }
 
-.mobile-menu a.active { text-decoration: bold; }
+.mobile-menu a.active { font-weight: bold;}
 
 /* ================= FOOTER ================= */
 footer {
