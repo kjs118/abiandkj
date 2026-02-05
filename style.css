@@ -134,8 +134,8 @@ footer {
     display: block;
     margin: 0 auto;
   border: 8px solid #C78BD8; /* Purple border */
-/*  padding: 20px;              /* Space inside the border */
-/*  border-radius: 8px; */
+  padding: 20px;              /* Space inside the border */
+  border-radius: 8px; 
 }
 /* 🎵 Decorative Music Notes */
 .notes {
