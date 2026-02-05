@@ -23,7 +23,7 @@ body {
     #C78BD8
   );
     background-size: 200% 200%;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
 
     animation: waveShift 10s linear infinite;
     z-index: 1000;
