@@ -367,16 +367,13 @@ footer {
     max-width: 500px;
     padding: 40px;
     text-align: center;
-    /*border: 8px solid #C78BD8; /* Purple border */
-    /*padding: 10px;              /* Space inside the border */
+    display: inline-block;
+  max-width: 400px
+    border: 8px solid #C78BD8; /* Purple border */
+    padding: 10px;              /* Space inside the border */
     /*  border-radius: 8px; */
 }
-.booking-box {
-  display: inline-block;
-  max-width: 400px;
-  border: 8px solid #C78BD8;
-  padding: 20px;
-}
+
 
 /* ===== Desktop Header Adjustments ===== */
 @media (min-width: 768px) {
