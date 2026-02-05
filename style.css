@@ -133,6 +133,9 @@ footer {
     object-fit: contain;  /* SHOW FULL IMAGE */
     display: block;
     margin: 0 auto;
+     border: 8px solid #C78BD8; /* Purple border */
+  padding: 20px;              /* Space inside the border */
+  border-radius: 8px;
 }
 /* 🎵 Decorative Music Notes */
 .notes {
@@ -208,7 +211,7 @@ footer {
 /* Optional: very small mobile screens */
 @media (max-width: 400px) {
     .instagram-wrapper {
-   /*     height: 400px;   /* shrink on tiny phones */
+       height: 400px;   /* shrink on tiny phones */
     }
 }
 
