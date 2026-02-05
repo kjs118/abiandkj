@@ -184,17 +184,22 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+    // Use start of today to avoid time-of-day issues
     const today = new Date();
-    console.log('Today is:', today.toLocaleDateString());  // ← Check this in console
+    today.setHours(0, 0, 0, 0);
+    console.log('Today (midnight):', today.toLocaleDateString());
 
     const upcomingList = document.querySelector('.events-list');
     const archiveList = document.getElementById('archive-list');
     const archiveSection = document.getElementById('archive');
+
     const events = Array.from(upcomingList.querySelectorAll('.event-item'));
 
     events.forEach(event => {
-      const dateStr = event.querySelector('.event-date').textContent.trim();
-      console.log('Processing date string:', dateStr);  // ← See every date
+      const dateElem = event.querySelector('.event-date');
+      if (!dateElem) return;
+      const dateStr = dateElem.textContent.trim();
+      console.log('Processing:', dateStr);
 
       const parts = dateStr.split('/');
       if (parts.length !== 3) {
@@ -202,59 +207,63 @@
         return;
       }
 
-      const month = parseInt(parts[0], 10) - 1;
-      const day = parseInt(parts[1], 10);
-      const year = parseInt(parts[2], 10);
+      const month = parseInt(parts[0], 10);
+      const day   = parseInt(parts[1], 10);
+      const year  = parseInt(parts[2], 10);
 
-      const eventDate = new Date(year, month, day, 0, 0, 0);  // Midnight to avoid time zone weirdness
-      console.log('Parsed as:', eventDate.toLocaleDateString(), '— is past?', eventDate < today);
+      if (isNaN(month) || isNaN(day) || isNaN(year)) {
+        console.log('NaN in parts:', dateStr);
+        return;
+      }
+
+      // month -1 for JS Date (0=Jan)
+      const eventDate = new Date(year, month - 1, day, 0, 0, 0);
+      console.log('Parsed:', eventDate.toLocaleDateString(), '— past?', eventDate < today);
 
       if (isNaN(eventDate.getTime())) {
-        console.log('Invalid date parsed:', dateStr);
+        console.log('Invalid date:', dateStr);
         return;
       }
 
       if (eventDate < today) {
         archiveList.appendChild(event);
-        console.log('Moved to archive:', dateStr);
+        console.log('→ Moved to archive');
       }
     });
 
-    // Sort upcoming: earliest first
-    const remainingEvents = Array.from(upcomingList.querySelectorAll('.event-item'));
-    remainingEvents.sort((a, b) => {
-      const dateA = parseDate(a.querySelector('.event-date').textContent.trim());
-      const dateB = parseDate(b.querySelector('.event-date').textContent.trim());
-      return dateA - dateB;
+    // Sort upcoming (earliest first)
+    const remaining = Array.from(upcomingList.querySelectorAll('.event-item'));
+    remaining.sort((a, b) => {
+      const da = parseDate(a.querySelector('.event-date')?.textContent.trim() || '');
+      const db = parseDate(b.querySelector('.event-date')?.textContent.trim() || '');
+      return da - db;
     });
-
     upcomingList.innerHTML = '';
-    remainingEvents.forEach(event => upcomingList.appendChild(event));
+    remaining.forEach(el => upcomingList.appendChild(el));
 
-    // Sort archive: most recent first
-    const archivedEvents = Array.from(archiveList.querySelectorAll('.event-item'));
-    archivedEvents.sort((a, b) => {
-      const dateA = parseDate(a.querySelector('.event-date').textContent.trim());
-      const dateB = parseDate(b.querySelector('.event-date').textContent.trim());
-      return dateB - dateA;
+    // Sort archive (most recent past first)
+    const archived = Array.from(archiveList.querySelectorAll('.event-item'));
+    archived.sort((a, b) => {
+      const da = parseDate(a.querySelector('.event-date')?.textContent.trim() || '');
+      const db = parseDate(b.querySelector('.event-date')?.textContent.trim() || '');
+      return db - da;
     });
-
     archiveList.innerHTML = '';
-    archivedEvents.forEach(event => archiveList.appendChild(event));
+    archived.forEach(el => archiveList.appendChild(el));
 
-    // Show archive only if needed
     if (archiveList.children.length > 0) {
       archiveSection.style.display = 'block';
     }
   });
 
-  function parseDate(dateStr) {
-    const parts = dateStr.split('/');
-    if (parts.length !== 3) return new Date(0);
-    const month = parseInt(parts[0], 10) - 1;
-    const day = parseInt(parts[1], 10);
-    const year = parseInt(parts[2], 10);
-    return new Date(year, month, day, 0, 0, 0);
+  function parseDate(str) {
+    if (!str) return new Date(0);
+    const p = str.split('/');
+    if (p.length !== 3) return new Date(0);
+    const m = parseInt(p[0], 10) - 1;
+    const d = parseInt(p[1], 10);
+    const y = parseInt(p[2], 10);
+    return new Date(y, m, d, 0, 0, 0);
   }
 </script>
 </body>
