@@ -188,7 +188,7 @@ footer {
     width: 100%;
     max-width: 500px;   /* adjust for desktop */
     margin: 0 auto;     /* centers the iframe */
-   /* height: 500px;      /* default height (mobile first) */
+    height: 500px;      /* default height (mobile first) 
 }
 
 .instagram-wrapper iframe {
