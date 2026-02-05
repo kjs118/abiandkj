@@ -170,13 +170,16 @@ footer {
     flex: 1;
     min-width: 300px;
     text-align: center;
-    background-color: #C78BD8; /* The Instagram purple */
-    padding: 20px;             /* Space around the inner content */
 }
 
 .about-image img {
     width: 100%;
     height: auto;
+  background-color: #C78BD8; /* The Instagram purple */
+  padding: 20px;             /* Space around the inner content */
+  background-color: white;   /* Inner content stays white */
+  padding: 20px;             /* Optional inner padding */
+  border-radius: 8px;        /* Optional rounding */
 }
 
 .instagram-wrapper {
