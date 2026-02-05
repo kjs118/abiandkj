@@ -131,7 +131,7 @@ footer {
     max-width: 850px;     /* controls desktop size */
     max-height: 65vh;     /* prevents skyscraper effect */
     object-fit: contain;  /* SHOW FULL IMAGE */
-       margin: 60px auto;             /* ⭐ centers it horizontally */
+       margin: 10px auto;             /* ⭐ centers it horizontally */
        padding: 40px;
     display: block;
     margin: 0 auto;
