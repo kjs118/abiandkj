@@ -13,9 +13,19 @@ body {
     position: sticky;
     top: 0;
     /*background: white; */
-      background: linear-gradient(270deg, #C78BD8, #D88BC7, #8BC3D8, #C78BD8);
-      background-size: 800% 800%; /* smooth animation */
-      animation: gradientShift 20s ease infinite;
+     /* Base color */
+      background: #C78BD8;
+      /* Animated gradient overlay */
+  background-image: linear-gradient(
+    270deg,
+    #C78BD8,
+    #ffffff,
+    #C78BD8
+  );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+
+    animation: waveShift 8s ease-in-out infinite;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
