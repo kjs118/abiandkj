@@ -178,32 +178,45 @@
         <p>&copy; 2026 Abi & KJ. All rights reserved.</p>
     </footer>
 
- <script>
+<script>
   function toggleMenu() {
     document.getElementById('mobile-menu').classList.toggle('open');
   }
 
   document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();
+    console.log('Today is:', today.toLocaleDateString());  // ← Check this in console
+
     const upcomingList = document.querySelector('.events-list');
     const archiveList = document.getElementById('archive-list');
     const archiveSection = document.getElementById('archive');
     const events = Array.from(upcomingList.querySelectorAll('.event-item'));
 
-    // Move past events to archive
     events.forEach(event => {
       const dateStr = event.querySelector('.event-date').textContent.trim();
+      console.log('Processing date string:', dateStr);  // ← See every date
+
       const parts = dateStr.split('/');
-      if (parts.length !== 3) return;
+      if (parts.length !== 3) {
+        console.log('Invalid format:', dateStr);
+        return;
+      }
+
       const month = parseInt(parts[0], 10) - 1;
       const day = parseInt(parts[1], 10);
       const year = parseInt(parts[2], 10);
-      const eventDate = new Date(year, month, day);
 
-      if (isNaN(eventDate.getTime())) return;
+      const eventDate = new Date(year, month, day, 0, 0, 0);  // Midnight to avoid time zone weirdness
+      console.log('Parsed as:', eventDate.toLocaleDateString(), '— is past?', eventDate < today);
+
+      if (isNaN(eventDate.getTime())) {
+        console.log('Invalid date parsed:', dateStr);
+        return;
+      }
 
       if (eventDate < today) {
         archiveList.appendChild(event);
+        console.log('Moved to archive:', dateStr);
       }
     });
 
@@ -218,32 +231,30 @@
     upcomingList.innerHTML = '';
     remainingEvents.forEach(event => upcomingList.appendChild(event));
 
-    // Sort archive: most recent first (newest past show at top)
-    // Change to dateA - dateB if you want oldest first instead
+    // Sort archive: most recent first
     const archivedEvents = Array.from(archiveList.querySelectorAll('.event-item'));
     archivedEvents.sort((a, b) => {
       const dateA = parseDate(a.querySelector('.event-date').textContent.trim());
       const dateB = parseDate(b.querySelector('.event-date').textContent.trim());
-      return dateB - dateA;  // <-- most recent first
+      return dateB - dateA;
     });
 
     archiveList.innerHTML = '';
     archivedEvents.forEach(event => archiveList.appendChild(event));
 
-    // Show archive only if it has events
+    // Show archive only if needed
     if (archiveList.children.length > 0) {
       archiveSection.style.display = 'block';
     }
   });
 
-  // Helper function for cleaner date parsing
   function parseDate(dateStr) {
     const parts = dateStr.split('/');
-    if (parts.length !== 3) return new Date(0); // fallback invalid
+    if (parts.length !== 3) return new Date(0);
     const month = parseInt(parts[0], 10) - 1;
     const day = parseInt(parts[1], 10);
     const year = parseInt(parts[2], 10);
-    return new Date(year, month, day);
+    return new Date(year, month, day, 0, 0, 0);
   }
 </script>
 </body>
