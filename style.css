@@ -165,7 +165,7 @@ footer {
   border: none;
   height: 3px;
   background-color: #C78BD8;
-  width: 60%;          /* controls line length */
+  width: 80%;          /* controls line length */
   max-width: 500px;    /* prevents it getting huge on big screens */
   margin: 40px auto;   /* centers it horizontally */
   border-radius: 2px;  /* optional soft edges */
@@ -364,12 +364,18 @@ footer {
 
 /* ================= BOOKING ================= */
 .booking {
-    max-width: 300px
-    padding: 20px;
+    max-width: 500px;
+    padding: 40px;
     text-align: center;
-    border: 8px solid #C78BD8; /* Purple border */
-    padding: 10px;              /* Space inside the border */
+    /*border: 8px solid #C78BD8; /* Purple border */
+    /*padding: 10px;              /* Space inside the border */
     /*  border-radius: 8px; */
+}
+.booking-box {
+  display: inline-block;
+  max-width: 400px;
+  border: 8px solid #C78BD8;
+  padding: 20px;
 }
 
 /* ===== Desktop Header Adjustments ===== */
