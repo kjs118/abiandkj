@@ -128,15 +128,14 @@ footer {
 
 .hero-image {
     width: 100%;
-    max-width: 850px;     /* controls desktop size */
-    max-height: 65vh;     /* prevents skyscraper effect */
-    object-fit: contain;  /* SHOW FULL IMAGE */
-       margin: 10px auto;             /* ⭐ centers it horizontally */
-       padding: 40px;
+    max-width: 850px;
+    max-height: 65vh;
+    object-fit: contain;
     display: block;
-    margin: 0 auto;
-        border: 8px solid #C78BD8; /* Purple border */
-       padding: 10px;              /* Space inside the border */
+    margin: 20px auto;       /* space outside image */
+    border: 8px solid #C78BD8;
+    padding: 0;              /* ⭐ removes white gap */
+    box-sizing: border-box;  /* keeps border tight */
 }
  /* border: 8px solid #C78BD8; /* Purple border */
  /*  padding: 20px;              /* Space inside the border */
