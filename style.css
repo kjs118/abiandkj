@@ -18,9 +18,11 @@ body {
       /* Animated gradient overlay */
   background-image: linear-gradient(
     315deg,
-    #C78BD8,
-    #ffffff,
-    #C78BD8
+    #C78BD8 0%, 
+    #D8B8F5 20%, 
+    #ffffff 50%, 
+    #D8B8F5 80%, 
+    #C78BD8 100%
   );
     background-size: 200% 100%;
     background-repeat: repeat-x;
