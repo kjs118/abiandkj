@@ -126,7 +126,7 @@ footer {
 .hero-image {
     display: inline-block;
     width: 90%;          /* controls size */
-    max-width: 850px;    /* desktop limit */
+    max-width: 500px;    /* desktop limit */
     height: auto;        /* preserves proportions */
     border: 8px solid #C78BD8;
 }
