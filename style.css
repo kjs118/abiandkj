@@ -172,7 +172,7 @@ footer {
 .about {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 10px;
     gap: 10px;
 }
 
@@ -181,7 +181,7 @@ footer {
     min-width: 300px;
     text-align: center;
     border: 8px solid #C78BD8; /* Purple border */
-    padding: 20px;              /* Space inside the border */
+    padding: 10px;              /* Space inside the border */
     /*  border-radius: 8px; */
 }
 
