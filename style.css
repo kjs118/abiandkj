@@ -22,8 +22,8 @@ body {
     #ffffff,
     #C78BD8
   );
-    background-size: 200% 200%;
-    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    background-repeat: repeat-x;
 
     animation: waveShift 10s linear infinite;
     z-index: 1000;
@@ -34,7 +34,7 @@ body {
 /* Animation waves */
 @keyframes waveShift {
   0% { background-position: 0% 0%; }
-  100% { background-position: -100% -100%; }
+  100% { background-position: -100% 0%; }
 }
 
 
