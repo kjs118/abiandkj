@@ -137,7 +137,7 @@ footer {
 /* 🎵 Decorative Music Notes */
 .notes {
     position: absolute;
-    width: 170px;                 /* BIG version */
+    width: 120px;                 /* BIG version */
     pointer-events: none;
     transition: all 0.7s cubic-bezier(.22,1,.36,1);
     z-index: 2;
@@ -156,7 +156,7 @@ footer {
 @media (max-width: 768px) {
 
     .notes {
-        width: 85px;
+        width: 45px;
         top: 8px;
     }
 
