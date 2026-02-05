@@ -135,7 +135,7 @@ footer {
     margin: 0 auto;
   border: 8px solid #C78BD8; /* Purple border */
 /*  padding: 20px;              /* Space inside the border */
-/*  border-radius: 8px;
+/*  border-radius: 8px; */
 }
 /* 🎵 Decorative Music Notes */
 .notes {
@@ -171,11 +171,11 @@ footer {
 
 .about-image, .about-text {
     flex: 1;
-    min-width: 264px;
+    min-width: 300px;
     text-align: center;
     border: 8px solid #C78BD8; /* Purple border */
   padding: 20px;              /* Space inside the border */
-  border-radius: 8px;
+/*  border-radius: 8px; */
 }
 
 .about-image img {
