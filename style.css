@@ -364,7 +364,8 @@ footer {
 
 /* ================= BOOKING ================= */
 .booking {
-    max-width: 500px;
+    max-width: 500px; 
+    margin: 60px auto;             /* ⭐ centers it horizontally */
     padding: 40px;
     display: block; 
     text-align: center;
