@@ -86,117 +86,10 @@
     </footer>
 
 <script>
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
 
-  
- <!-- Toggle Menu -->
-    
-  function toggleMenu() {
-    document.getElementById('mobile-menu').classList.toggle('open');
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // midnight local time
-    console.log('Today (midnight):', today.toLocaleDateString('en-US'));
-
-    const upcomingList = document.querySelector('.events-list');
-    const archiveList = document.getElementById('archive-list');
-    const archiveSection = document.getElementById('archive');
-
-    // Get all event items once
-    const allEvents = Array.from(upcomingList.querySelectorAll('.event-item'));
-
-    const pastEvents = [];
-    const upcomingEvents = [];
-
-    allEvents.forEach(event => {
-      const dateElem = event.querySelector('.event-date');
-      if (!dateElem) return;
-
-      let dateStr = dateElem.textContent.trim();
-      console.log('Processing:', dateStr);
-
-      const parts = dateStr.split('/');
-      if (parts.length !== 3) {
-        console.log('Invalid format:', dateStr);
-        upcomingEvents.push(event); // keep as upcoming if bad
-        return;
-      }
-
-      let month = parseInt(parts[0], 10);
-      let day   = parseInt(parts[1], 10);
-      let year  = parseInt(parts[2], 10);
-
-      if (isNaN(month) || isNaN(day) || isNaN(year)) {
-        console.log('NaN in parts:', dateStr);
-        upcomingEvents.push(event);
-        return;
-      }
-
-      // Auto-fix 2-digit years (e.g. 25 → 2025)
-      if (year < 100) year += 2000;
-
-      const eventDate = new Date(year, month - 1, day, 0, 0, 0);
-      console.log('Parsed:', eventDate.toLocaleDateString('en-US'), '— past?', eventDate < today);
-
-      if (isNaN(eventDate.getTime())) {
-        console.log('Invalid date after parse:', dateStr);
-        upcomingEvents.push(event);
-      } else if (eventDate < today) {
-        pastEvents.push(event);
-        console.log('→ Classified as PAST');
-      } else {
-        upcomingEvents.push(event);
-        console.log('→ Classified as UPCOMING');
-      }
-    });
-
-    // Sort upcoming: earliest first
-    upcomingEvents.sort((a, b) => {
-      const da = getDateObj(a);
-      const db = getDateObj(b);
-      return da - db;
-    });
-
-    // Clear and repopulate upcoming
-    upcomingList.innerHTML = '';
-    upcomingEvents.forEach(el => upcomingList.appendChild(el));
-
-    // Sort past: most recent first (newest past at top)
-    pastEvents.sort((a, b) => {
-      const da = getDateObj(a);
-      const db = getDateObj(b);
-      return db - da; // reverse for newest first
-    });
-
-    // Clear and repopulate archive
-    archiveList.innerHTML = '';
-    pastEvents.forEach(el => archiveList.appendChild(el));
-
-    // Show/hide archive section
-    if (pastEvents.length > 0) {
-      archiveSection.style.display = 'block';
-      console.log(`Moved ${pastEvents.length} past events to archive`);
-    } else {
-      console.log('No past events detected');
-    }
-  });
-
-  // Helper to get Date object from event element
-  function getDateObj(eventEl) {
-    const str = eventEl.querySelector('.event-date')?.textContent.trim() || '';
-    const p = str.split('/');
-    if (p.length !== 3) return new Date(0);
-    let m = parseInt(p[0], 10);
-    let d = parseInt(p[1], 10);
-    let y = parseInt(p[2], 10);
-    if (y < 100) y += 2000;
-    return new Date(y, m - 1, d, 0, 0, 0);
-  }
-
-
-
-<script>
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbzKIO0LgvOTzx__3TsTCsiTtsz-vVf8hpfAbs7KE9Axta4q7_1EydkgKDcPLWj_4KPZNTMBd-uD0U/pub?output=csv";
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -251,9 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
       pastEvents.forEach(e => archiveList.appendChild(e.el));
 
       if (pastEvents.length > 0) archiveSection.style.display = 'block';
-    });
+    })
+    .catch(err => console.error("Sheet load error:", err));
 });
-  
 </script>
+
 </body>
 </html>
