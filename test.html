@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abi & KJ - Show Dates</title>
+    <link rel="stylesheet" href="style.css">
+      <!-- Favicon -->
+<link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+<link rel="icon" href="assets/favicon/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180">
+<!-- Optional: for Android/Chrome high-res -->
+<link rel="icon" href="assets/favicon/android-chrome-192x192.png" type="image/png" sizes="192x192">
+</head>
+
+
+<body>
+    <header class="sticky-header">
+        <div class="header-content">
+            
+ <!--  <img src="assets/music-notes2.png" class="notes notes-left" alt="">  -->
+    <img src="assets/music-notes2.png" class="notes notes-right" alt="">
+
+            <img src="assets/logo.jpg" alt="Abi & KJ Logo" class="logo">
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shows.html" class="active">Show Dates</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-nav">
+                <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+                <nav id="mobile-menu" class="mobile-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shows.html" class="active">Show Dates</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="booking.html">Booking</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="separator"></div>
+        
+    </header>
+
+
+    
+    <main>
+        <section class="show-dates">
+            <h2>Upcoming Shows</h2>
+            <div class="events-container">
+
+
+              
+            </div>
+        </section>
+
+  <hr class="divider">
+                    <!-- Archive Shows -->
+       <section id="archive" class="show-dates">
+          <h2>Past Shows</h2>
+              <div class="events-container">
+                 <div class="events-list" id="archive-list"></div>
+              </div>
+        </section>
+    </main>
+
+   <footer>
+
+          <!-- Instagram SVG Icon -->
+<a href="https://instagram.com/abiandkj" class="social instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+  <svg width="48" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.2A4.8 4.8 0 1112 17a4.8 4.8 0 010-9.8zm0 2A2.8 2.8 0 1012 15a2.8 2.8 0 000-5.6zm4.5-2.9a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"
+          fill="#C78BD8"/>
+  </svg>
+</a>
+
+
+        </div>
+        <p>&copy; 2026 Abi & KJ. All rights reserved.</p>
+    </footer>
+
+<script>
+
+  
+ <!-- Toggle Menu -->
+    
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // midnight local time
+    console.log('Today (midnight):', today.toLocaleDateString('en-US'));
+
+    const upcomingList = document.querySelector('.events-list');
+    const archiveList = document.getElementById('archive-list');
+    const archiveSection = document.getElementById('archive');
+
+    // Get all event items once
+    const allEvents = Array.from(upcomingList.querySelectorAll('.event-item'));
+
+    const pastEvents = [];
+    const upcomingEvents = [];
+
+    allEvents.forEach(event => {
+      const dateElem = event.querySelector('.event-date');
+      if (!dateElem) return;
+
+      let dateStr = dateElem.textContent.trim();
+      console.log('Processing:', dateStr);
+
+      const parts = dateStr.split('/');
+      if (parts.length !== 3) {
+        console.log('Invalid format:', dateStr);
+        upcomingEvents.push(event); // keep as upcoming if bad
+        return;
+      }
+
+      let month = parseInt(parts[0], 10);
+      let day   = parseInt(parts[1], 10);
+      let year  = parseInt(parts[2], 10);
+
+      if (isNaN(month) || isNaN(day) || isNaN(year)) {
+        console.log('NaN in parts:', dateStr);
+        upcomingEvents.push(event);
+        return;
+      }
+
+      // Auto-fix 2-digit years (e.g. 25 → 2025)
+      if (year < 100) year += 2000;
+
+      const eventDate = new Date(year, month - 1, day, 0, 0, 0);
+      console.log('Parsed:', eventDate.toLocaleDateString('en-US'), '— past?', eventDate < today);
+
+      if (isNaN(eventDate.getTime())) {
+        console.log('Invalid date after parse:', dateStr);
+        upcomingEvents.push(event);
+      } else if (eventDate < today) {
+        pastEvents.push(event);
+        console.log('→ Classified as PAST');
+      } else {
+        upcomingEvents.push(event);
+        console.log('→ Classified as UPCOMING');
+      }
+    });
+
+    // Sort upcoming: earliest first
+    upcomingEvents.sort((a, b) => {
+      const da = getDateObj(a);
+      const db = getDateObj(b);
+      return da - db;
+    });
+
+    // Clear and repopulate upcoming
+    upcomingList.innerHTML = '';
+    upcomingEvents.forEach(el => upcomingList.appendChild(el));
+
+    // Sort past: most recent first (newest past at top)
+    pastEvents.sort((a, b) => {
+      const da = getDateObj(a);
+      const db = getDateObj(b);
+      return db - da; // reverse for newest first
+    });
+
+    // Clear and repopulate archive
+    archiveList.innerHTML = '';
+    pastEvents.forEach(el => archiveList.appendChild(el));
+
+    // Show/hide archive section
+    if (pastEvents.length > 0) {
+      archiveSection.style.display = 'block';
+      console.log(`Moved ${pastEvents.length} past events to archive`);
+    } else {
+      console.log('No past events detected');
+    }
+  });
+
+  // Helper to get Date object from event element
+  function getDateObj(eventEl) {
+    const str = eventEl.querySelector('.event-date')?.textContent.trim() || '';
+    const p = str.split('/');
+    if (p.length !== 3) return new Date(0);
+    let m = parseInt(p[0], 10);
+    let d = parseInt(p[1], 10);
+    let y = parseInt(p[2], 10);
+    if (y < 100) y += 2000;
+    return new Date(y, m - 1, d, 0, 0, 0);
+  }
+
+
+
+const sheetURL = https://docs.google.com/spreadsheets/d/e/2PACX-1vSbzKIO0LgvOTzx__3TsTCsiTtsz-vVf8hpfAbs7KE9Axta4q7_1EydkgKDcPLWj_4KPZNTMBd-uD0U/pub?output=csv;
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(data => {
+    const rows = data.split("\n").slice(1); // skip headers
+    const container = document.getElementById("events-container");
+
+    rows.forEach(row => {
+      const cols = row.split(",");
+
+      if(cols.length < 3) return;
+
+      const date = cols[0].trim();
+      const venue = cols[1].trim();
+      const address = cols[2].trim();
+
+      const event = document.createElement("div");
+      event.className = "event-item";
+      event.innerHTML = `
+        <div class="event-date">${date}</div>
+        <div class="event-venue">${venue}</div>
+        <div class="event-address">${address}</div>
+      `;
+      container.appendChild(event);
+    });
+  });
+
+  
+</script>
+</body>
+</html>
