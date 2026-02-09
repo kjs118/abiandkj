@@ -52,12 +52,9 @@
     <main>
         <section class="show-dates">
             <h2>Upcoming Shows</h2>
-            <div class="events-container">
-                  <div class="event-item">
-                        <div class="event-date"></div>
-                        <div class="event-venue"></div>
-                        <div class="event-address"><br></div>
-                    </div>
+                    <div class="events-container events-list" id="events-list"></div>
+
+                
 
               
             </div>
@@ -199,7 +196,7 @@
 
 
 
-const sheetURL = https://docs.google.com/spreadsheets/d/e/2PACX-1vSbzKIO0LgvOTzx__3TsTCsiTtsz-vVf8hpfAbs7KE9Axta4q7_1EydkgKDcPLWj_4KPZNTMBd-uD0U/pub?output=csv;
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbzKIO0LgvOTzx__3TsTCsiTtsz-vVf8hpfAbs7KE9Axta4q7_1EydkgKDcPLWj_4KPZNTMBd-uD0U/pub?output=csv";
 
 fetch(sheetURL)
   .then(res => res.text())
