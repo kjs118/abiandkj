@@ -196,34 +196,63 @@
 
 
 
+<script>
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbzKIO0LgvOTzx__3TsTCsiTtsz-vVf8hpfAbs7KE9Axta4q7_1EydkgKDcPLWj_4KPZNTMBd-uD0U/pub?output=csv";
 
-fetch(sheetURL)
-  .then(res => res.text())
-  .then(data => {
-    const rows = data.split("\n").slice(1); // skip headers
-    const container = document.getElementById("events-container");
+document.addEventListener('DOMContentLoaded', function() {
 
-    rows.forEach(row => {
-      const cols = row.split(",");
+  fetch(sheetURL)
+    .then(res => res.text())
+    .then(data => {
 
-      if(cols.length < 3) return;
+      const container = document.getElementById("events-list");
+      const archiveList = document.getElementById("archive-list");
+      const archiveSection = document.getElementById("archive");
 
-      const date = cols[0].trim();
-      const venue = cols[1].trim();
-      const address = cols[2].trim();
+      const rows = data.split("\n").slice(1);
+      const today = new Date();
+      today.setHours(0,0,0,0);
 
-      const event = document.createElement("div");
-      event.className = "event-item";
-      event.innerHTML = `
-        <div class="event-date">${date}</div>
-        <div class="event-venue">${venue}</div>
-        <div class="event-address">${address}</div>
-      `;
-      container.appendChild(event);
+      const pastEvents = [];
+      const upcomingEvents = [];
+
+      rows.forEach(row => {
+        const cols = row.split(",");
+        if (cols.length < 3) return;
+
+        const date = cols[0].trim();
+        const venue = cols[1].trim();
+        const address = cols[2].trim();
+
+        const event = document.createElement("div");
+        event.className = "event-item";
+        event.innerHTML = `
+          <div class="event-date">${date}</div>
+          <div class="event-venue">${venue}</div>
+          <div class="event-address">${address}</div>
+        `;
+
+        const parts = date.split('/');
+        let m = parseInt(parts[0]), d = parseInt(parts[1]), y = parseInt(parts[2]);
+        if (y < 100) y += 2000;
+        const eventDate = new Date(y, m-1, d);
+
+        if (eventDate < today) {
+          pastEvents.push({el: event, date: eventDate});
+        } else {
+          upcomingEvents.push({el: event, date: eventDate});
+        }
+      });
+
+      upcomingEvents.sort((a,b) => a.date - b.date);
+      pastEvents.sort((a,b) => b.date - a.date);
+
+      upcomingEvents.forEach(e => container.appendChild(e.el));
+      pastEvents.forEach(e => archiveList.appendChild(e.el));
+
+      if (pastEvents.length > 0) archiveSection.style.display = 'block';
     });
-  });
-
+});
   
 </script>
 </body>
