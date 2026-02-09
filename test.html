@@ -110,15 +110,17 @@ document.addEventListener('DOMContentLoaded', function() {
       const upcomingEvents = [];
 
      rows.forEach(row => {
-  const cols = row.split(",");
+const cols = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+         const clean = v => v.replace(/^"|"$/g, '').trim();
+
   if (cols.length < 7) return;
 
-  const date   = cols[0].trim();
-  const venue  = cols[1].trim();
-  const street = cols[3].trim();
-  const city   = cols[4].trim();
-  const state  = cols[5].trim();
-  const zip    = cols[6].trim();
+const date   = clean(cols[0]);
+const venue  = clean(cols[1]);
+const street = clean(cols[3]);
+const city   = clean(cols[4]);
+const state  = clean(cols[5]);
+const zip    = clean(cols[6]);
 
         const event = document.createElement("div");
         event.className = "event-item";
