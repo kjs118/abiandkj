@@ -109,21 +109,27 @@ document.addEventListener('DOMContentLoaded', function() {
       const pastEvents = [];
       const upcomingEvents = [];
 
-      rows.forEach(row => {
-        const cols = row.split(",");
-        if (cols.length < 3) return;
+     rows.forEach(row => {
+  const cols = row.split(",");
+  if (cols.length < 7) return;
 
-        const date = cols[0].trim();
-        const venue = cols[1].trim();
-        const address = cols[2].trim();
+  const date   = cols[0].trim();
+  const venue  = cols[1].trim();
+  const street = cols[3].trim();
+  const city   = cols[4].trim();
+  const state  = cols[5].trim();
+  const zip    = cols[6].trim();
 
         const event = document.createElement("div");
         event.className = "event-item";
-        event.innerHTML = `
-          <div class="event-date">${date}</div>
-          <div class="event-venue">${venue}</div>
-          <div class="event-address">${address}</div>
-        `;
+      event.innerHTML = `
+  <div class="event-date">${date}</div>
+  <div class="event-venue">${venue}</div>
+  <div class="event-address">
+    ${street}<br>
+    ${city}, ${state} ${zip}
+  </div>
+`;
 
         const parts = date.split('/');
         let m = parseInt(parts[0]), d = parseInt(parts[1]), y = parseInt(parts[2]);
